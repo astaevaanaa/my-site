@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Inspect Octopus</title>
+  <script src="https://unpkg.com/@rive-app/canvas@latest/rive.js"></script>
+</head>
+<body>
+  <canvas id="canvas" width="500" height="500"></canvas>
+  <script>
+    async function runInspect() {
+      const results = {};
+      try {
+        const rInstance = new rive.Rive({
+          src: 'animation/octopus.riv?v=' + Date.now(),
+          canvas: document.getElementById('canvas'),
+          autoplay: true,
+          stateMachines: 'State Machine 1'
+        });
+
+        await new Promise((resolve) => {
+          rInstance.on('load', () => {
+            setTimeout(() => {
+              try {
+                const file = rInstance.file;
+                results.status = "success";
+                
+                const vm = file.viewModelByIndex(0);
+                const vmInstance = vm.defaultInstance();
+                
+                const props = vmInstance.getProperties() || [];
+                results.properties = [];
+                for (let i = 0; i < props.length; i++) {
+                  const prop = props[i];
+                  results.properties.push({
+                    name: prop.name,
+                    protoKeys: Object.getOwnPropertyNames(Object.getPrototypeOf(prop)),
+                    value: prop.value
+                  });
+                }
+                
+              } catch (e) {
+                results.error = "Error during load callback: " + e.message;
+              }
+              resolve();
+            }, 500);
+          });
+          
+          rInstance.on('loaderror', (err) => {
+            results.status = "error";
+            results.error = "Load error: " + err;
+            resolve();
+          });
+        });
+        
+      } catch (e) {
+        results.status = "error";
+        results.error = e.message + "\n" + e.stack;
+      }
+      
+      // Send the results back to our receiver server
+      await fetch('http://localhost:8099', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(results)
+      });
+    }
+    
+    runInspect();
+  </script>
+</body>
+</html>

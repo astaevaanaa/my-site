@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://unpkg.com/@rive-app/canvas@2.9.1/rive.js"></script>
+</head>
+<body style="background: #222; color: white; padding: 50px; font-family: sans-serif;">
+  <h1>Rive Artboard Bounds Inspector</h1>
+  <canvas id="canvas" style="display: none;"></canvas>
+  
+  <script>
+    const r = new rive.Rive({
+      src: 'animation/icon.riv',
+      canvas: document.getElementById('canvas'),
+      autoplay: false,
+      onLoad: () => {
+        try {
+          const file = r.file;
+          const count = file.artboardCount();
+          const artboardsInfo = [];
+          
+          for (let i = 0; i < count; i++) {
+            const artboardObj = file.artboardByIndex(i);
+            if (artboardObj) {
+              artboardsInfo.push({
+                index: i,
+                name: artboardObj.name,
+                bounds: artboardObj.bounds
+              });
+            }
+          }
+
+          const div = document.createElement('div');
+          div.id = 'output';
+          div.style.fontSize = '18px';
+          div.style.marginTop = '20px';
+          div.innerHTML = "<strong>Artboards bounds:</strong><pre>" + JSON.stringify(artboardsInfo, null, 2) + "</pre>";
+          document.body.appendChild(div);
+        } catch (e) {
+          const div = document.createElement('div');
+          div.style.color = 'red';
+          div.innerText = "Error: " + e.message;
+          document.body.appendChild(div);
+        }
+      },
+      onLoadError: (err) => {
+        const div = document.createElement('div');
+        div.style.color = 'red';
+        div.innerText = "Load error: " + err;
+        document.body.appendChild(div);
+      }
+    });
+  </script>
+</body>
+</html>

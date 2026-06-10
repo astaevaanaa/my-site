@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      background: #2935B7;
+      color: white;
+      font-family: sans-serif;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      padding: 20px;
+    }
+    div {
+      border: 1px solid white;
+      padding: 10px;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.4);
+    }
+    canvas {
+      width: 250px;
+      height: 250px;
+      background: #111;
+      display: block;
+      margin: 10px auto;
+    }
+    p {
+      margin: 5px 0 0 0;
+      font-size: 12px;
+      word-break: break-all;
+    }
+  </style>
+  <script src="https://unpkg.com/@rive-app/canvas@2.9.1/rive.js"></script>
+</head>
+<body>
+  <div>
+    <h3>ViewModel1</h3>
+    <canvas id="c-viewmodel1"></canvas>
+    <p id="t-viewmodel1">Loading...</p>
+  </div>
+  <div>
+    <h3>Artboard 9</h3>
+    <canvas id="c-artboard9"></canvas>
+    <p id="t-artboard9">Loading...</p>
+  </div>
+  <div>
+    <h3>Artboard 7</h3>
+    <canvas id="c-artboard7"></canvas>
+    <p id="t-artboard7">Loading...</p>
+  </div>
+  <div>
+    <h3>phone</h3>
+    <canvas id="c-phone"></canvas>
+    <p id="t-phone">Loading...</p>
+  </div>
+  <div>
+    <h3>location</h3>
+    <canvas id="c-location"></canvas>
+    <p id="t-location">Loading...</p>
+  </div>
+  <div>
+    <h3>people</h3>
+    <canvas id="c-people"></canvas>
+    <p id="t-people">Loading...</p>
+  </div>
+  <div>
+    <h3>ticket</h3>
+    <canvas id="c-ticket"></canvas>
+    <p id="t-ticket">Loading...</p>
+  </div>
+  <div>
+    <h3>heart</h3>
+    <canvas id="c-heart"></canvas>
+    <p id="t-heart">Loading...</p>
+  </div>
+  <div>
+    <h3>Default (No name)</h3>
+    <canvas id="c-default"></canvas>
+    <p id="t-default">Loading...</p>
+  </div>
+
+  <script>
+    const artboards = [
+      { id: 'c-viewmodel1', textId: 't-viewmodel1', name: 'ViewModel1' },
+      { id: 'c-artboard9', textId: 't-artboard9', name: 'Artboard 9' },
+      { id: 'c-artboard7', textId: 't-artboard7', name: 'Artboard 7' },
+      { id: 'c-phone', textId: 't-phone', name: 'phone' },
+      { id: 'c-location', textId: 't-location', name: 'location' },
+      { id: 'c-people', textId: 't-people', name: 'people' },
+      { id: 'c-ticket', textId: 't-ticket', name: 'ticket' },
+      { id: 'c-heart', textId: 't-heart', name: 'heart' },
+      { id: 'c-default', textId: 't-default', name: null }
+    ];
+
+    artboards.forEach(art => {
+      const config = {
+        src: 'animation/icon.riv',
+        canvas: document.getElementById(art.id),
+        autoplay: true,
+        layout: new rive.Layout({
+          fit: rive.Fit.Contain,
+          alignment: rive.Alignment.Center
+        }),
+        onLoad: () => {
+          try {
+            document.getElementById(art.textId).innerText = 
+              "Active Artboard: " + r.artboardName + 
+              "\\nState Machines: " + JSON.stringify(r.stateMachineNames) + 
+              "\\nAnimations: " + JSON.stringify(r.animationNames);
+          } catch(e) {
+            document.getElementById(art.textId).innerText = "Error: " + e.message;
+          }
+        },
+        onLoadError: (err) => {
+          document.getElementById(art.textId).innerText = "Load error: " + err;
+        }
+      };
+      if (art.name) {
+        config.artboard = art.name;
+      }
+      const r = new rive.Rive(config);
+    });
+  </script>
+</body>
+</html>

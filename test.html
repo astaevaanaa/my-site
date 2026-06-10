@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Rive Artboard Renderer</title>
+  <script src="https://unpkg.com/@rive-app/canvas@latest/rive.js"></script>
+</head>
+<body>
+  <div id="container"></div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const artboardNames = ["Artboard 7"];
+      const container = document.getElementById('container');
+      
+      let index = 0;
+      
+      function renderNext() {
+        if (index >= artboardNames.length) {
+          console.log("All done!");
+          return;
+        }
+        
+        const name = artboardNames[index];
+        const canvas = document.createElement('canvas');
+        canvas.width = 500;
+        canvas.height = 500;
+        container.appendChild(canvas);
+        
+        try {
+          const r = new rive.Rive({
+            src: 'animation/icon.riv',
+            canvas: canvas,
+            autoplay: true,
+            artboard: name,
+            stateMachines: 'State Machine 1',
+            onLoad: () => {
+              setTimeout(() => {
+                const imgData = canvas.toDataURL('image/png');
+                
+                // POST to server
+                const formData = new URLSearchParams();
+                formData.append('name', name);
+                formData.append('image', imgData);
+                
+                fetch('http://localhost:8089/', {
+                  method: 'POST',
+                  body: formData
+                }).then(() => {
+                  container.removeChild(canvas);
+                  r.cleanup();
+                  index++;
+                  renderNext();
+                });
+              }, 800);
+            },
+            onLoadError: (err) => {
+              console.error(name, "load error", err);
+              index++;
+              renderNext();
+            }
+          });
+        } catch (e) {
+          console.error(name, "init error", e);
+          index++;
+          renderNext();
+        }
+      }
+      
+      renderNext();
+    });
+  </script>
+</body>
+</html>

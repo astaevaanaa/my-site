@@ -1,0 +1,23 @@
+{
+  "status": "success",
+  "vmInstanceMethods": [
+    "constructor",
+    "number",
+    "string",
+    "boolean",
+    "color",
+    "enum",
+    "trigger",
+    "list",
+    "viewModel",
+    "image",
+    "artboard",
+    "replaceViewModel",
+    "getViewModelName",
+    "incrementReferenceCount",
+    "decrementReferenceCount",
+    "getProperties",
+    "unref"
+  ],
+  "vmInstanceKeys": []
+}

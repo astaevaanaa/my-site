@@ -1,0 +1,1066 @@
+/* ==========================================================================
+   Base resets & Modern Normalization
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background: linear-gradient(180deg, #307ae2 0%, #2e43df 20%, #3355dc 50%, #a42ae2 100%); /* Seamless gradient matching assets from top to bottom */
+  color: #ffffff;
+  overflow-x: hidden;
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   Floating Navigation Header
+   ========================================================================== */
+.header-floating {
+  position: absolute; /* Changed from fixed to absolute to scroll away naturally */
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  width: calc(100% - 48px); /* Fluid width with lateral margin on small screens */
+  max-width: 536px; /* Locks at designed size on desktop matching new Header.svg */
+  height: auto;
+  pointer-events: none; /* Allows pointer events only for interactive links */
+}
+
+.header-inner {
+  position: relative;
+  width: 100%;
+  height: auto;
+  pointer-events: auto; /* Re-enable pointer events for links */
+  filter: drop-shadow(0 8px 30px rgba(0, 0, 0, 0.3));
+}
+
+.header-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Overlay Navigation Map */
+.header-nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.nav-link {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  cursor: pointer;
+  background: transparent;
+  transition: background-color 0.2s ease-in-out;
+}
+
+/* Precision mapping matching word columns in Header.svg precisely */
+.nav-link:nth-child(1) { left: 2.5%; width: 13%; }     /* HOME */
+.nav-link:nth-child(2) { left: 19.5%; width: 13%; }    /* ABOUT */
+.nav-link:nth-child(3) { left: 37.5%; width: 16%; }    /* PORTFOLIO */
+.nav-link:nth-child(4) { left: 58.5%; width: 16%; }    /* SERVICES */
+.nav-link:nth-child(5) { left: 79.5%; width: 18%; }    /* CONTACTS */
+
+/* Visual highlight on focus for accessibility */
+.nav-link:focus-visible {
+  outline: 2px dashed #ffffff;
+  outline-offset: -4px;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+}
+
+/* ==========================================================================
+   Hero Section (100vh Screen)
+   ========================================================================== */
+.hero-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.hero-svg-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+}
+
+.hero-svg-bg foreignObject {
+  pointer-events: auto;
+}
+
+#rive-canvas-hero {
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+/* ==========================================================================
+   Continuous Main Content
+   ========================================================================== */
+.main-content {
+  position: relative;
+  width: 100%;
+  background-image: url('assets/background main.svg?v=2');
+  background-size: 100% auto; /* Stretches horizontally to 100% of viewport width with natural aspect ratio */
+  background-position: top center;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 140px; /* Precise top padding below Hero screen */
+  padding-bottom: 0; /* Removed excess padding below Footer to prevent spacing accumulation */
+}
+
+/* ==========================================================================
+   Proportional Scaling and Responsive SVGs
+   ========================================================================== */
+.section-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 0 24px; /* Safety padding for tablet & mobile screen widths */
+  margin: 0 0 140px 0; /* Default 140px spacing between major sections */
+}
+
+.footer-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 0 24px;
+}
+
+.section-svg-wrapper {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+}
+
+/* Set max-widths strictly matching designed asset viewboxes to protect quality */
+#about .section-svg-wrapper { 
+  max-width: 1440px; 
+  position: relative; /* Enable relative positioning context specifically for About overlay */
+}
+#work .section-svg-wrapper { max-width: 1269px; }
+#offer .section-svg-wrapper { max-width: 1260px; }
+#process .section-svg-wrapper {
+  max-width: 1260px;
+  position: relative; /* Context for left pig overlay */
+}
+
+#process .section-svg {
+  position: relative;
+  z-index: 2; /* Stacks process cards in front of the left pig animation */
+}
+
+/* Left Background Decorative Pig Animation Wrapper */
+.process-pig-wrapper {
+  position: absolute;
+  left: -65px;  /* Shifted slightly to the right to fit fully inside the visible area and center */
+  top: -120px;  /* Shifted slightly downward to center vertically between sections */
+  width: 280px;
+  height: 280px;
+  z-index: 1;   /* Sit behind the process cards */
+  pointer-events: none; /* Decorative element, do not intercept pointer events */
+}
+
+.process-pig-wrapper canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+@media (max-width: 1260px) {
+  .process-pig-wrapper {
+    left: -30px;
+    top: -85px;
+    width: 220px;
+    height: 220px;
+  }
+}
+
+@media (max-width: 900px) {
+  .process-pig-wrapper {
+    left: -5px;
+    top: -70px;
+    width: 160px;
+    height: 160px;
+  }
+}
+
+@media (max-width: 768px) {
+  .process-pig-wrapper {
+    display: none; /* Hide background decorative animation on narrow tablet/mobile screens */
+  }
+}
+
+#faq .section-svg-wrapper { 
+  max-width: 1260px; 
+  flex-direction: column; 
+  align-items: center; 
+}
+#connection .section-svg-wrapper { max-width: 1440px; }
+#footer .section-svg-wrapper { 
+  max-width: 1436px; 
+  position: relative; /* Enable relative positioning context for children absolute overlays */
+}
+
+/* Footer Navigation & Social Overlays */
+.footer-overlay-link {
+  position: absolute;
+  background-color: transparent;
+  cursor: pointer;
+  z-index: 5;
+  transition: background-color 0.2s ease-in-out;
+  border-radius: 4px;
+}
+
+/* Subtle elegant cue on hover and focus-visible */
+.footer-overlay-link:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.footer-overlay-link:focus-visible {
+  outline: 2px dashed #ffffff;
+  outline-offset: 2px;
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Footer Pig Animation Wrapper */
+.footer-pig-wrapper {
+  position: absolute;
+  bottom: calc(100% - 155px); /* Sits on top of the footer, intersected by the divider line */
+  left: calc(50% - 160px);   /* Shifted left to align with the 'Let's talk business' content area */
+  transform: translateX(-50%);
+  width: 440px;
+  height: 440px;
+  z-index: 6; /* Render above the footer SVG but below any focus overlays if needed */
+  pointer-events: none; /* Decorative element, do not block clicks */
+}
+
+.footer-pig-wrapper canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Individual Navigation links - centered vertically around y=60px (top=40px, height=40px) */
+/* Top: 40/154 = 25.97% (26%), height: 40/154 = 25.97% (26%) */
+.footer-nav-link {
+  top: 26%;
+  height: 26%;
+}
+
+.footer-nav-link[href="#hero"] {
+  left: 37.33%; /* 536/1436 */
+  width: 4.18%;  /* 60/1436 */
+}
+
+.footer-nav-link[href="#about"] {
+  left: 42.48%; /* 610/1436 */
+  width: 5.71%;  /* 82/1436 */
+}
+
+.footer-nav-link[href="#work"] {
+  left: 49.30%; /* 708/1436 */
+  width: 5.15%;  /* 74/1436 */
+}
+
+.footer-nav-link[href="#connection"] {
+  left: 55.57%; /* 798/1436 */
+  width: 6.82%;  /* 98/1436 */
+}
+
+/* Individual Social links - matching rect elements exactly (x=1199, 1253, 1307, y=40, w=40, h=40) */
+.footer-social-link {
+  top: 26%;
+  height: 26%;
+}
+
+.footer-social-link.linkedin {
+  left: 83.50%; /* 1199/1436 */
+  width: 2.79%;  /* 40/1436 */
+}
+
+.footer-social-link.behance {
+  left: 87.26%; /* 1253/1436 */
+  width: 2.79%;  /* 40/1436 */
+}
+
+.footer-social-link.twitter {
+  left: 91.02%; /* 1307/1436 */
+  width: 2.79%;  /* 40/1436 */
+}
+
+/* Mobile tap target expander */
+@media (max-width: 768px) {
+  .footer-overlay-link::after {
+    content: '';
+    position: absolute;
+    top: -12px;
+    left: -12px;
+    right: -12px;
+    bottom: -12px;
+  }
+}
+
+@media (max-width: 1260px) {
+  .footer-pig-wrapper {
+    width: 370px;
+    height: 370px;
+    bottom: calc(100% - 130px);
+    left: calc(50% - 135px);
+  }
+}
+
+@media (max-width: 900px) {
+  .footer-pig-wrapper {
+    width: 290px;
+    height: 290px;
+    bottom: calc(100% - 102px);
+    left: calc(50% - 105px);
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-pig-wrapper {
+    width: 220px;
+    height: 220px;
+    bottom: calc(100% - 78px);
+    left: calc(50% - 80px);
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-pig-wrapper {
+    width: 180px;
+    height: 180px;
+    bottom: calc(100% - 63px);
+    left: calc(50% - 65px);
+  }
+}
+
+
+.section-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* About Section Social Link Overlays */
+.social-links-overlay {
+  position: absolute;
+  /* Card coordinates inside container about.svg (viewBox 1440x734): x=797.5, y=549.361, w=421, h=118 */
+  left: 55.38%;
+  top: 74.84%;
+  width: 29.24%;
+  height: 16.08%;
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+}
+
+.social-overlay-link {
+  display: block;
+  width: 100%;
+  height: 33.33%;
+  background-color: transparent;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.social-overlay-link:hover {
+  background-color: rgba(53, 75, 238, 0.04); /* very subtle elegant visual cue on hover */
+}
+
+.social-overlay-link:focus-visible {
+  outline: 2px dashed #354bee;
+  outline-offset: -4px;
+  background-color: rgba(53, 75, 238, 0.1);
+  border-radius: 8px;
+}
+
+/* CV Document Overlay Link */
+.cv-overlay-link {
+  position: absolute;
+  /* Coordinates inside container about.svg (viewBox 1440x734): x=225, y=520, w=127, h=30 */
+  left: 15.63%;
+  top: 70.84%;
+  width: 8.82%;
+  height: 4.09%;
+  background-color: transparent;
+  cursor: pointer;
+  z-index: 10;
+  border-radius: 4px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.cv-overlay-link:hover {
+  background-color: rgba(249, 135, 191, 0.08); /* Pink accent tint on hover matching #F987BF */
+}
+
+.cv-overlay-link:focus-visible {
+  outline: 2px dashed #f987bf;
+  outline-offset: -2px;
+  background-color: rgba(249, 135, 191, 0.15);
+}
+
+/* Specific Section Spacing Exceptions */
+#process {
+  margin-top: -44px;
+  margin-bottom: 110px; /* Exception: 110px spacing to FAQ Section */
+}
+
+#faq {
+  margin-top: -25px; /* Shift FAQ section 25px upward */
+  margin-bottom: 100px; /* Exception: 100px spacing to Connection Section */
+}
+
+/* Accordion Layout */
+.faq-accordion {
+  width: 100%;
+  max-width: 1160px;
+  margin: 40px auto 0 auto; /* 40px gap below the header SVG */
+}
+
+.faq-item {
+  width: 100%;
+  background: #F1EFFC;
+  border-radius: 8px;
+  padding: 24.5px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  cursor: pointer;
+  transition: border-radius 0.3s ease, background-color 0.2s ease;
+  margin-bottom: 30px;
+  user-select: none;
+}
+
+.faq-item:last-child {
+  margin-bottom: 0;
+}
+
+.faq-item.open {
+  border-radius: 12px;
+}
+
+.faq-content {
+  flex: 1;
+  margin-right: 24px;
+}
+
+.faq-question {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #333333;
+  line-height: 1.4;
+  margin: 0;
+  min-height: 45px;
+  display: flex;
+  align-items: center;
+}
+
+.faq-answer-wrapper {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease-out;
+  overflow: hidden;
+}
+
+.faq-item.open .faq-answer-wrapper {
+  grid-template-rows: 1fr;
+}
+
+.faq-answer-content {
+  min-height: 0;
+}
+
+.faq-answer {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #4D4D4D;
+  line-height: 1.6;
+  margin-top: 16px;
+  white-space: pre-line; /* Preserves multiline spacing in Answer 3 */
+}
+
+.faq-toggle {
+  width: 45px;
+  height: 45px;
+  border-radius: 7.5px;
+  border: 1px solid #E1DBD1;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.3s ease, border-color 0.2s ease;
+}
+
+.faq-toggle svg {
+  width: 17px;
+  height: 17px;
+  transition: transform 0.3s ease;
+}
+
+.faq-item.open .faq-toggle svg {
+  transform: rotate(45deg);
+}
+
+/* Keyboard outline styling */
+.faq-item:focus-visible {
+  outline: 2px dashed #a42ae2;
+  outline-offset: 2px;
+}
+
+/* Responsiveness overrides */
+@media (max-width: 768px) {
+  .faq-item {
+    padding: 20px 24px;
+  }
+  .faq-question {
+    font-size: 18px;
+  }
+}
+
+/* Connection Section Offset */
+#connection {
+  margin-top: -48px; /* Shift connection section 100px downward from -148px (-48px total) */
+  margin-bottom: 140px; /* Standard 140px spacing to Footer */
+}
+
+#connection .section-svg-wrapper {
+  max-width: 1440px;
+  position: relative;
+}
+
+/* Responsive Overlay Form */
+.connection-form {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Let pointer events pass to vector background where needed */
+}
+
+.conn-label, .conn-input, .conn-btn {
+  pointer-events: auto; /* Re-enable events specifically for inputs and submit button */
+  box-sizing: border-box;
+}
+
+.conn-label {
+  display: none; /* Hide HTML labels on desktop (since SVG has them pre-drawn) */
+}
+
+/* Percentage offsets matching coordinates inside viewBox 1440x611 */
+.conn-input {
+  position: absolute;
+  left: 50.83%; /* x = 732 */
+  width: 36.53%; /* w = 526 */
+  background: #ffffff;
+  color: #000000;
+  border: none;
+  border-radius: 5px;
+  padding: 0 16px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 16px;
+  outline: none;
+}
+
+.conn-input:focus-visible {
+  outline: 2px solid #5221E6;
+}
+
+.name-input {
+  top: 24.88%; /* y = 152 */
+  height: 8.18%; /* h = 50 */
+}
+
+.email-input {
+  top: 44.84%; /* y = 274 */
+  height: 8.18%; /* h = 50 */
+}
+
+.message-input {
+  top: 64.81%; /* y = 396 */
+  height: 16.37%; /* h = 100 */
+  padding: 12px 16px;
+  resize: none;
+}
+
+.conn-btn {
+  position: absolute;
+  left: 50.90%; /* x = 733 */
+  top: 87.73%; /* y = 536 */
+  width: 36.46%; /* w = 525 */
+  height: 12.27%; /* h = 75 */
+  background: #5221E6;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.1s ease, background-color 0.2s ease, box-shadow 0.1s ease;
+  box-shadow: 0 4px 12px rgba(82, 33, 230, 0.25);
+}
+
+.conn-btn:hover {
+  background-color: #4316cc;
+}
+
+.conn-btn:active {
+  transform: scale(0.98) translateY(2px);
+  box-shadow: 0 2px 6px rgba(82, 33, 230, 0.15);
+}
+
+/* Mobile responsive stacked fallback layout */
+.connection-mobile-info {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  #connection .section-svg-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .connection-svg {
+    display: none; /* Hide static SVG image containing input frames */
+  }
+
+  .connection-mobile-info {
+    display: block;
+    width: 100%;
+    margin-bottom: 24px;
+    text-align: left;
+  }
+
+  .connection-title {
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 8px;
+  }
+
+  .connection-email {
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 18px;
+    color: #ffffff;
+    text-decoration: underline;
+  }
+
+  .connection-form {
+    position: relative;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    pointer-events: auto;
+  }
+
+  .conn-label {
+    display: block;
+    font-family: 'Inter', -apple-system, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #ffffff;
+    margin-bottom: 6px;
+    text-align: left;
+  }
+
+  .conn-input {
+    position: static;
+    width: 100%;
+    height: 50px;
+    margin-bottom: 16px;
+  }
+
+  .message-input {
+    height: 120px;
+  }
+
+  .conn-btn {
+    position: static;
+    width: 100%;
+    height: 56px;
+    margin-top: 8px;
+  }
+}
+
+/* ==========================================================================
+   Selected Work Carousel & Responsive Cards
+   ========================================================================== */
+
+/* 1. Header Cropping Wrapper */
+.work-container-inner {
+  width: 100%;
+  max-width: 1269px; /* Matches viewBox width of container work.svg */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.work-header-wrapper {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  height: 0;
+  padding-bottom: 13.4%; /* Crops the original SVG at y=170 (170/1269 = 13.4%) to show only title/subtitle */
+  margin-bottom: 32px;
+}
+
+.work-header-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  pointer-events: none;
+  user-select: none;
+}
+
+.portfolio-carousel-wrapper {
+  --card-scale: 0.85; /* Define base scale globally inside the wrapper so all calculations are exact */
+  width: 100%;
+  max-width: calc(601px * var(--card-scale) * 2 + 58px); /* Locks width exactly to 2 cards + 58px gap */
+  margin: 0 auto; /* Centers the carousel wrapper */
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: visible; /* Allows arrows to sit above layout without clipping */
+}
+
+/* Background Decorative Pig Animation Wrapper */
+.work-pig-wrapper {
+  position: absolute;
+  top: calc(-140px * var(--card-scale));
+  right: calc(40px * var(--card-scale));
+  width: calc(320px * var(--card-scale));
+  height: calc(320px * var(--card-scale));
+  z-index: 1; /* Sits behind the z-index: 2 cards scroller */
+  pointer-events: none; /* Let pointer events pass to scroller/cards */
+}
+
+.work-pig-wrapper canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #000000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 100;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.carousel-arrow.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.carousel-arrow:hover {
+  background: #ffffff;
+  transform: translateY(-50%) scale(1.08);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.carousel-arrow:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.carousel-arrow-left {
+  left: -70px; /* Positioned completely outside Card 1 with a 14px gap */
+}
+
+.carousel-arrow-right {
+  right: -70px; /* Positioned completely outside Card 2 with a 14px gap */
+}
+
+/* Hide Arrow buttons on touchscreen/mobile displays where native swipe is preferred */
+@media (max-width: 768px) {
+  .carousel-arrow {
+    display: none !important;
+  }
+}
+
+/* 3. Carousel Scroller Layout */
+.portfolio-carousel {
+  display: flex;
+  gap: 58px; /* Fixed gap of exactly 58px between cards */
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch; /* Momentum scrolling on iOS devices */
+  padding: 16px 24px 32px; /* Default safety padding for tablets & mobile */
+  list-style: none;
+  width: 100%;
+  position: relative;
+  z-index: 2; /* Sit in front of background animations like the pig */
+  
+  /* Hides scrollbars on all browsers */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.portfolio-carousel::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}
+
+@media (min-width: 1025px) {
+  .portfolio-carousel {
+    /* No horizontal padding needed on desktop since wrapper is exact width */
+    padding: 16px 0 32px 0;
+  }
+}
+
+/* 4. Mathematically Proportional Reusable Cards */
+.portfolio-card {
+  --card-scale: 0.85; /* Desktop base scale slightly reduced from 1.0 to fit laptop viewports perfectly */
+  flex: 0 0 calc(601px * var(--card-scale));
+  width: calc(601px * var(--card-scale));
+  height: calc(696px * var(--card-scale)); /* Restores original Figma tall rounded card proportions exactly */
+  background: #ffffff; /* Solid white background with NO transparency and NO blur */
+  border-radius: calc(25px * var(--card-scale));
+  box-shadow: 0 calc(4px * var(--card-scale)) calc(4px * var(--card-scale)) rgba(0, 0, 0, 0.25); /* Replicates original Figma Drop Shadow exactly */
+  padding: calc(21px * var(--card-scale)) calc(30.5px * var(--card-scale)) calc(37.5px * var(--card-scale)) calc(30.5px * var(--card-scale));
+  display: flex;
+  flex-direction: column;
+  scroll-snap-align: start;
+  position: relative;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+}
+
+/* Solid Blue Preview Container Area (Figma color #2935B7) */
+.portfolio-card-preview {
+  width: calc(540px * var(--card-scale));
+  height: calc(453px * var(--card-scale)); /* Preserves original Figma proportion (540:453) */
+  background: #2935B7; /* Exact solid blue Figma color */
+  border-radius: calc(20px * var(--card-scale));
+  position: relative;
+  overflow: hidden;
+  align-self: center;
+}
+
+/* Inner contents shifted slightly for perfect x=45.5px alignment matching original designs */
+.portfolio-card-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  width: 100%;
+  padding: 0 calc(15px * var(--card-scale));
+}
+
+.portfolio-card-title {
+  font-size: calc(24px * var(--card-scale));
+  font-weight: 700;
+  color: #000000; /* Original pure black text */
+  margin: calc(24px * var(--card-scale)) 0 calc(10px * var(--card-scale)) 0;
+  letter-spacing: -0.015em;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.portfolio-card-description {
+  font-size: calc(15px * var(--card-scale));
+  line-height: 1.5;
+  color: #000000; /* Original pure black text description */
+  margin: 0 0 calc(20px * var(--card-scale)) 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  flex-grow: 1;
+}
+
+/* Original simple rounded border button from container.svg */
+.portfolio-card-button {
+  align-self: flex-start;
+  width: calc(99px * var(--card-scale));
+  height: calc(47px * var(--card-scale));
+  background: #ffffff;
+  border: calc(1px * var(--card-scale)) solid #D0D0D0;
+  border-radius: calc(13.5px * var(--card-scale));
+  color: #000000; /* Pure black text */
+  text-decoration: none;
+  font-weight: 700;
+  font-size: calc(15px * var(--card-scale));
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: calc(6px * var(--card-scale));
+  transition: all 0.2s ease-in-out;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  cursor: pointer;
+  margin-top: auto;
+}
+
+.portfolio-card-button::after {
+  content: '→';
+  font-size: calc(17px * var(--card-scale));
+  transition: transform 0.2s ease;
+}
+
+.portfolio-card-button:hover {
+  background: #f7f7f7;
+  border-color: #b0b0b0;
+}
+
+.portfolio-card-button:hover::after {
+  transform: translateX(4px);
+}
+
+/* 5. Mathematically Scaled Responsive Breakpoints */
+@media (max-width: 1320px) {
+  /* Scales Card width perfectly to 480.8px */
+  .portfolio-carousel-wrapper,
+  .portfolio-card {
+    --card-scale: 0.8; 
+  }
+  .carousel-arrow-left { left: -60px; }
+  .carousel-arrow-right { right: -60px; }
+}
+
+@media (max-width: 1024px) {
+  /* Scales Card width perfectly to 432px on tablets */
+  .portfolio-carousel-wrapper,
+  .portfolio-card {
+    --card-scale: 0.72;
+  }
+  .carousel-arrow-left { left: -20px; }
+  .carousel-arrow-right { right: -20px; }
+}
+
+@media (max-width: 768px) {
+  /* Scales Card width perfectly to 360px on medium mobile screens */
+  .portfolio-carousel-wrapper,
+  .portfolio-card {
+    --card-scale: 0.6;
+  }
+  .portfolio-carousel {
+    gap: 20px;
+    padding-bottom: 24px;
+  }
+  .work-header-wrapper {
+    margin-bottom: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Scales Card width perfectly to 300px on small mobile viewports */
+  .portfolio-carousel-wrapper,
+  .portfolio-card {
+    --card-scale: 0.5;
+  }
+}
+
+/* Rive Animation Canvas Sizing */
+.rive-animation-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+/* Subtle Streak Shooting Stars */
+.shooting-star {
+  opacity: 0;
+  stroke: #FCEF94;
+  stroke-linecap: round;
+  will-change: transform, opacity;
+}
+
+.shooting-star-1 { animation: shoot-1 30s linear infinite; }
+.shooting-star-2 { animation: shoot-2 30s linear infinite; }
+.shooting-star-3 { animation: shoot-3 30s linear infinite; }
+.shooting-star-4 { animation: shoot-4 30s linear infinite; }
+.shooting-star-5 { animation: shoot-5 30s linear infinite; }
+
+@keyframes shoot-1 {
+  0% { transform: translate(0, 0); opacity: 0; }
+  0.9% { transform: translate(-30px, 15px); opacity: 1; }
+  4.1% { transform: translate(-200px, 100px); opacity: 1; }
+  5.0% { transform: translate(-250px, 125px); opacity: 0; }
+  100% { transform: translate(-250px, 125px); opacity: 0; }
+}
+
+@keyframes shoot-2 {
+  0% { transform: translate(0, 0); opacity: 0; }
+  20.0% { transform: translate(0, 0); opacity: 0; }
+  20.9% { transform: translate(-30px, 15px); opacity: 1; }
+  24.1% { transform: translate(-200px, 100px); opacity: 1; }
+  25.0% { transform: translate(-250px, 125px); opacity: 0; }
+  100% { transform: translate(-250px, 125px); opacity: 0; }
+}
+
+@keyframes shoot-3 {
+  0% { transform: translate(0, 0); opacity: 0; }
+  40.0% { transform: translate(0, 0); opacity: 0; }
+  40.9% { transform: translate(-30px, 15px); opacity: 1; }
+  44.1% { transform: translate(-200px, 100px); opacity: 1; }
+  45.0% { transform: translate(-250px, 125px); opacity: 0; }
+  100% { transform: translate(-250px, 125px); opacity: 0; }
+}
+
+@keyframes shoot-4 {
+  0% { transform: translate(0, 0); opacity: 0; }
+  60.0% { transform: translate(0, 0); opacity: 0; }
+  60.9% { transform: translate(-30px, 15px); opacity: 1; }
+  64.1% { transform: translate(-200px, 100px); opacity: 1; }
+  65.0% { transform: translate(-250px, 125px); opacity: 0; }
+  100% { transform: translate(-250px, 125px); opacity: 0; }
+}
+
+@keyframes shoot-5 {
+  0% { transform: translate(0, 0); opacity: 0; }
+  80.0% { transform: translate(0, 0); opacity: 0; }
+  80.9% { transform: translate(-30px, 15px); opacity: 1; }
+  84.1% { transform: translate(-200px, 100px); opacity: 1; }
+  85.0% { transform: translate(-250px, 125px); opacity: 0; }
+  100% { transform: translate(-250px, 125px); opacity: 0; }
+}
