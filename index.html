@@ -729,12 +729,12 @@ A set of 5 animations starts from around 1.5 weeks and can take longer depending
         });
       }
 
-      // Card 8: Mofy Animation (Duplicate)
-      const mofyCanvas8 = document.getElementById('rive-canvas-8');
-      if (mofyCanvas8) {
-        const mofyRive8 = new rive.Rive({
-          src: 'animation/mofy_(2).riv?v=4',
-          canvas: mofyCanvas8,
+      // Card 8: Octopus 1 Animation
+      const octopusCanvas8 = document.getElementById('rive-canvas-8');
+      if (octopusCanvas8) {
+        const octopusRive8 = new rive.Rive({
+          src: 'animation/octopus_1.riv?v=2',
+          canvas: octopusCanvas8,
           autoplay: true,
           artboard: 'Artboard',
           stateMachines: 'State Machine 1',
@@ -743,15 +743,24 @@ A set of 5 animations starts from around 1.5 weeks and can take longer depending
             alignment: rive.Alignment.Center
           }),
           onLoad: () => {
-            mofyRive8.resizeDrawingSurfaceToCanvas();
+            octopusRive8.resizeDrawingSurfaceToCanvas();
+            try {
+              const viewModel = octopusRive8.viewModelByName("ViewModel1");
+              if (viewModel) {
+                const viewModelInstance = viewModel.defaultInstance();
+                octopusRive8.bindViewModelInstance(viewModelInstance);
+              }
+            } catch (e) {
+              console.error("Error binding ViewModel for Octopus 1:", e);
+            }
           },
           onLoadError: (err) => {
-            console.error("Mofy 8 load error:", err);
+            console.error("Octopus 1 load error:", err);
           }
         });
         
         window.addEventListener('resize', () => {
-          mofyRive8.resizeDrawingSurfaceToCanvas();
+          octopusRive8.resizeDrawingSurfaceToCanvas();
         });
       }
 
