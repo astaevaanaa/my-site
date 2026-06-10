@@ -798,12 +798,12 @@ A set of 5 animations starts from around 1.5 weeks and can take longer depending
         });
       }
 
-      // Card 10: Lumi Animation (Duplicate)
-      const lumiCanvas10 = document.getElementById('rive-canvas-10');
-      if (lumiCanvas10) {
-        const lumiRive10 = new rive.Rive({
-          src: 'animation/lumi_main.riv?v=3',
-          canvas: lumiCanvas10,
+      // Card 10: Father Frost Animation
+      const fatherFrostCanvas10 = document.getElementById('rive-canvas-10');
+      if (fatherFrostCanvas10) {
+        const fatherFrostRive10 = new rive.Rive({
+          src: 'animation/Father%20Frost.riv?v=2',
+          canvas: fatherFrostCanvas10,
           autoplay: true,
           stateMachines: 'State Machine 1',
           layout: new rive.Layout({
@@ -811,15 +811,24 @@ A set of 5 animations starts from around 1.5 weeks and can take longer depending
             alignment: rive.Alignment.Center
           }),
           onLoad: () => {
-            lumiRive10.resizeDrawingSurfaceToCanvas();
+            fatherFrostRive10.resizeDrawingSurfaceToCanvas();
+            try {
+              const viewModel = fatherFrostRive10.viewModelByName("View Model 1") || (typeof fatherFrostRive10.defaultViewModel === 'function' ? fatherFrostRive10.defaultViewModel() : null);
+              if (viewModel) {
+                const viewModelInstance = viewModel.defaultInstance();
+                fatherFrostRive10.bindViewModelInstance(viewModelInstance);
+              }
+            } catch (e) {
+              console.warn("Father Frost ViewModel binding skipped/failed:", e);
+            }
           },
           onLoadError: (err) => {
-            console.error("Lumi 10 load error:", err);
+            console.error("Father Frost load error:", err);
           }
         });
         
         window.addEventListener('resize', () => {
-          lumiRive10.resizeDrawingSurfaceToCanvas();
+          fatherFrostRive10.resizeDrawingSurfaceToCanvas();
         });
       }
 
