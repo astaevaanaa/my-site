@@ -13,11 +13,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
   <!-- Core Design System stylesheet -->
   <link rel="stylesheet" href="index.css?v=42">
+  <!-- Preload Critical Hero Assets -->
+  <link rel="preload" href="https://unpkg.com/@rive-app/canvas@latest/rive.js" as="script">
+  <link rel="preload" href="assets/header.svg?v=2" as="image" type="image/svg+xml">
+  <link rel="preload" href="assets/Moon%20designer.svg" as="image" type="image/svg+xml">
+  <link rel="preload" href="animation/character.riv?v=9" as="fetch" crossorigin="anonymous">
 </head>
 <body>
 
   <!-- Floating Navigation Header -->
-  <header class="header-floating">
+  <header class="header-floating hero-fade">
     <div class="header-inner">
       <img src="assets/header.svg?v=2" alt="Portfolio Navigation" class="header-image" id="header-svg-img">
       <!-- Interactive Transparent Overlay Links -->
@@ -32,7 +37,7 @@
   </header>
 
   <!-- Hero Section (First Screen - 100vh) -->
-  <section class="hero-section" id="hero">
+  <section class="hero-section hero-fade" id="hero">
     <svg class="hero-svg-bg" viewBox="0 0 1929 1093" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMax slice">
       <g id="Frame 473825654" clip-path="url(#clip0_72_230)">
         <rect width="1929" height="1093" fill="url(#paint0_linear_72_230)"/>
@@ -587,7 +592,57 @@ A set of 5 animations starts from around 1.5 weeks and can take longer depending
 
   <!-- Rive Initialization Script -->
   <script>
+    // Start pre-fetching critical assets as early as possible (before DOMContentLoaded)
+    const characterRivUrl = 'animation/character.riv?v=9';
+    const riveFetchPromise = fetch(characterRivUrl)
+      .then(response => {
+        if (!response.ok) throw new Error('Network response was not ok');
+        return response.arrayBuffer();
+      })
+      .catch(err => {
+        console.error("Error fetching character.riv:", err);
+        return null;
+      });
+
+    const headerImgUrl = 'assets/header.svg?v=2';
+    const titleImgUrl = 'assets/Moon designer.svg';
+
+    const headerPromise = new Promise((resolve) => {
+      const img = new Image();
+      img.src = headerImgUrl;
+      if (img.complete) resolve();
+      else {
+        img.onload = () => resolve();
+        img.onerror = () => resolve();
+      }
+    });
+
+    const titlePromise = new Promise((resolve) => {
+      const img = new Image();
+      img.src = titleImgUrl;
+      if (img.complete) resolve();
+      else {
+        img.onload = () => resolve();
+        img.onerror = () => resolve();
+      }
+    });
+
+    const fontsPromise = document.fonts ? document.fonts.ready : Promise.resolve();
+
     document.addEventListener('DOMContentLoaded', () => {
+      let isHeroRevealed = false;
+      const revealHero = () => {
+        if (isHeroRevealed) return;
+        isHeroRevealed = true;
+        clearTimeout(globalFallback);
+        document.querySelectorAll('.hero-fade').forEach(el => el.classList.add('loaded'));
+      };
+
+      // Global fallback to reveal hero section if Rive CDN or assets stall (e.g. offline/blocked connection)
+      const globalFallback = setTimeout(() => {
+        console.warn("Hero load fallback triggered.");
+        revealHero();
+      }, 8000);
       // Card 1: Witch Animation
       const witchCanvas = document.getElementById('rive-canvas-1');
       if (witchCanvas) {
@@ -932,43 +987,58 @@ A set of 5 animations starts from around 1.5 weeks and can take longer depending
       // Hero: Character Animation
       const heroCanvas = document.getElementById('rive-canvas-hero');
       if (heroCanvas) {
-        const heroRive = new rive.Rive({
-          src: 'animation/character.riv?v=9',
-          canvas: heroCanvas,
-          autoplay: true,
-          stateMachines: 'State Machine 1',
-          layout: new rive.Layout({
-            fit: rive.Fit.Contain,
-            alignment: rive.Alignment.Center
-          }),
-          onLoad: () => {
-            heroRive.resizeDrawingSurfaceToCanvas();
-            // Safari rendering safety: enforce redraw once layout settles
-            requestAnimationFrame(() => {
-              heroRive.resizeDrawingSurfaceToCanvas();
-            });
-            setTimeout(() => {
-              heroRive.resizeDrawingSurfaceToCanvas();
-            }, 100);
-          },
-          onLoadError: (err) => {
-            console.error("Hero character load error:", err);
-          }
-        });
-        
-        // Trigger waving/greetings animation on click or tap
-        heroCanvas.addEventListener('click', () => {
-          const inputs = heroRive.stateMachineInputs('State Machine 1') || [];
-          const trigger = inputs.find(i => i.name === 'Trigger 1' || i.name === 'tap' || i.type === 1);
-          if (trigger) {
-            trigger.fire();
+        Promise.all([headerPromise, titlePromise, riveFetchPromise, fontsPromise]).then(([,, riveBuffer]) => {
+          let heroRive;
+          const riveConfig = {
+            canvas: heroCanvas,
+            autoplay: true,
+            stateMachines: 'State Machine 1',
+            layout: new rive.Layout({
+              fit: rive.Fit.Contain,
+              alignment: rive.Alignment.Center
+            }),
+            onLoad: () => {
+              // Defer initial resize to ensure heroRive is assigned
+              setTimeout(() => {
+                if (heroRive) heroRive.resizeDrawingSurfaceToCanvas();
+              }, 0);
+              // Safari rendering safety: enforce redraw once layout settles
+              requestAnimationFrame(() => {
+                if (heroRive) heroRive.resizeDrawingSurfaceToCanvas();
+                requestAnimationFrame(() => {
+                  if (heroRive) heroRive.resizeDrawingSurfaceToCanvas();
+                  revealHero();
+                });
+              });
+            },
+            onLoadError: (err) => {
+              console.error("Hero character load error:", err);
+              revealHero();
+            }
+          };
+
+          if (riveBuffer) {
+            riveConfig.buffer = riveBuffer;
           } else {
-            heroRive.play('greetings');
+            riveConfig.src = characterRivUrl;
           }
-        });
-        
-        window.addEventListener('resize', () => {
-          heroRive.resizeDrawingSurfaceToCanvas();
+
+          heroRive = new rive.Rive(riveConfig);
+
+          // Trigger waving/greetings animation on click or tap
+          heroCanvas.addEventListener('click', () => {
+            const inputs = heroRive.stateMachineInputs('State Machine 1') || [];
+            const trigger = inputs.find(i => i.name === 'Trigger 1' || i.name === 'tap' || i.type === 1);
+            if (trigger) {
+              trigger.fire();
+            } else {
+              heroRive.play('greetings');
+            }
+          });
+
+          window.addEventListener('resize', () => {
+            heroRive.resizeDrawingSurfaceToCanvas();
+          });
         });
       }
     });

@@ -1105,3 +1105,14 @@ body {
   85.0% { transform: translate(-250px, 125px); opacity: 0; }
   100% { transform: translate(-250px, 125px); opacity: 0; }
 }
+
+/* Hero section fade-in transition */
+.hero-fade {
+  opacity: 0;
+  transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: opacity;
+}
+
+.hero-fade.loaded {
+  opacity: 1;
+}
