@@ -80,7 +80,7 @@
         
         <!-- Layer Moon designer text behind the Rive character -->
         <image id="moon-designer" href="assets/Moon%20designer.svg" x="449.5" y="390" width="1030" height="350" opacity="0.70" />
-        <foreignObject x="414.5" y="390" width="1000" height="710">
+        <foreignObject x="414.5" y="390" width="1000" height="710" transform="translate(0,0)">
           <canvas id="rive-canvas-hero" style="width: 100%; height: 100%; display: block;"></canvas>
         </foreignObject>
 
@@ -916,6 +916,13 @@ A set of 5 animations starts from around 1.5 weeks and can take longer depending
           }),
           onLoad: () => {
             heroRive.resizeDrawingSurfaceToCanvas();
+            // Safari rendering safety: enforce redraw once layout settles
+            requestAnimationFrame(() => {
+              heroRive.resizeDrawingSurfaceToCanvas();
+            });
+            setTimeout(() => {
+              heroRive.resizeDrawingSurfaceToCanvas();
+            }, 100);
           },
           onLoadError: (err) => {
             console.error("Hero character load error:", err);
