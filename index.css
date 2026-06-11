@@ -109,9 +109,31 @@ body {
   transform: translate3d(0, 0, 0);
   will-change: transform;
 }
+.hero-character-container {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  --svg-scale: max(100vw / 1929, 100vh / 1093);
+  width: calc(1000px * var(--svg-scale));
+  height: calc(710px * var(--svg-scale));
+  transform: translate(calc(-50% - 50px * var(--svg-scale)), calc(7px * var(--svg-scale)));
+  pointer-events: none;
+  z-index: 5;
+}
 
-.hero-svg-bg foreignObject {
-  pointer-events: auto;
+@supports (height: 100dvh) {
+  .hero-character-container {
+    --svg-scale-dvh: max(100vw / 1929, 100dvh / 1093);
+    width: calc(1000px * var(--svg-scale-dvh));
+    height: calc(710px * var(--svg-scale-dvh));
+    transform: translate(calc(-50% - 50px * var(--svg-scale-dvh)), calc(7px * var(--svg-scale-dvh)));
+  }
+}
+
+.hero-character-container canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 #rive-canvas-hero {
