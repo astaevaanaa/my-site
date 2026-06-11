@@ -377,8 +377,6 @@
         
         if (!carousel || !leftArrow || !rightArrow) return;
         
-        const card = carousel.querySelector('.portfolio-card');
-        
         const updateArrows = () => {
           const scrollLeft = carousel.scrollLeft;
           const maxScroll = carousel.scrollWidth - carousel.clientWidth;
@@ -398,38 +396,44 @@
           }
         };
         
-        const getScrollStep = () => {
+        const getCarouselParams = () => {
           const card = carousel.querySelector('.portfolio-card');
-          if (!card) return carousel.clientWidth;
+          if (!card) return { cardStep: carousel.clientWidth, visibleCards: 1 };
           
           const cardWidth = card.offsetWidth;
           const style = window.getComputedStyle(card);
           const marginRight = parseFloat(style.marginRight) || 0;
           const cardStep = cardWidth + marginRight;
           
-          if (cardStep <= 0) return carousel.clientWidth;
+          // If the carousel fits 2 cards + the gap, visible count is 2, else 1
+          const visibleCards = (carousel.clientWidth >= cardWidth * 2 + marginRight - 10) ? 2 : 1;
           
-          // Calculate how many cards fit in the viewport (with a 5px tolerance)
-          const visibleWidth = carousel.clientWidth + 5; 
-          const visibleCards = Math.floor(visibleWidth / cardStep);
-          const scrollStepCount = Math.max(1, visibleCards);
-          
-          return scrollStepCount * cardStep;
+          return { cardStep, visibleCards };
         };
         
         leftArrow.addEventListener('click', () => {
-          const scrollStep = getScrollStep();
+          const { cardStep, visibleCards } = getCarouselParams();
           const currentScroll = carousel.scrollLeft;
-          let targetScroll = Math.floor((currentScroll - 5) / scrollStep) * scrollStep;
-          targetScroll = Math.max(0, targetScroll);
+          const currentIndex = Math.round(currentScroll / cardStep);
+          
+          let targetIndex = currentIndex - visibleCards;
+          targetIndex = Math.max(0, targetIndex);
+          
+          const targetScroll = targetIndex * cardStep;
           carousel.scrollTo({ left: targetScroll, behavior: 'smooth' });
         });
         
         rightArrow.addEventListener('click', () => {
-          const scrollStep = getScrollStep();
+          const { cardStep, visibleCards } = getCarouselParams();
           const currentScroll = carousel.scrollLeft;
           const maxScroll = carousel.scrollWidth - carousel.clientWidth;
-          let targetScroll = Math.floor(currentScroll / scrollStep) * scrollStep + scrollStep;
+          const currentIndex = Math.round(currentScroll / cardStep);
+          
+          let targetIndex = currentIndex + visibleCards;
+          const cardsCount = carousel.querySelectorAll('.portfolio-card').length;
+          targetIndex = Math.min(cardsCount - visibleCards, targetIndex);
+          
+          let targetScroll = targetIndex * cardStep;
           targetScroll = Math.min(maxScroll, targetScroll);
           carousel.scrollTo({ left: targetScroll, behavior: 'smooth' });
         });
