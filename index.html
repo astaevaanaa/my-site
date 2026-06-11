@@ -361,13 +361,40 @@
           }
         };
         
-        // Dynamic smooth scrolling by exactly the visible container width (page scroll)
+        const getScrollStep = () => {
+          const card = carousel.querySelector('.portfolio-card');
+          if (!card) return carousel.clientWidth;
+          
+          const cardWidth = card.offsetWidth;
+          const style = window.getComputedStyle(card);
+          const marginRight = parseFloat(style.marginRight) || 0;
+          const cardStep = cardWidth + marginRight;
+          
+          if (cardStep <= 0) return carousel.clientWidth;
+          
+          // Calculate how many cards fit in the viewport (with a 5px tolerance)
+          const visibleWidth = carousel.clientWidth + 5; 
+          const visibleCards = Math.floor(visibleWidth / cardStep);
+          const scrollStepCount = Math.max(1, visibleCards);
+          
+          return scrollStepCount * cardStep;
+        };
+        
         leftArrow.addEventListener('click', () => {
-          carousel.scrollBy({ left: -carousel.clientWidth, behavior: 'smooth' });
+          const scrollStep = getScrollStep();
+          const currentScroll = carousel.scrollLeft;
+          let targetScroll = Math.floor((currentScroll - 5) / scrollStep) * scrollStep;
+          targetScroll = Math.max(0, targetScroll);
+          carousel.scrollTo({ left: targetScroll, behavior: 'smooth' });
         });
         
         rightArrow.addEventListener('click', () => {
-          carousel.scrollBy({ left: carousel.clientWidth, behavior: 'smooth' });
+          const scrollStep = getScrollStep();
+          const currentScroll = carousel.scrollLeft;
+          const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+          let targetScroll = Math.floor(currentScroll / scrollStep) * scrollStep + scrollStep;
+          targetScroll = Math.min(maxScroll, targetScroll);
+          carousel.scrollTo({ left: targetScroll, behavior: 'smooth' });
         });
         
         carousel.addEventListener('scroll', updateArrows);
