@@ -14,7 +14,7 @@
   <!-- Core Design System stylesheet -->
   <link rel="stylesheet" href="index.css?v=42">
   <!-- Preload Critical Hero Assets -->
-  <link rel="preload" href="https://unpkg.com/@rive-app/canvas@latest/rive.js" as="script">
+  <link rel="preload" href="https://unpkg.com/@rive-app/canvas@2.38.0/rive.js" as="script">
   <link rel="preload" href="assets/header.svg?v=2" as="image" type="image/svg+xml">
   <link rel="preload" href="assets/Moon%20designer.svg" as="image" type="image/svg+xml">
   <link rel="preload" href="animation/character.riv?v=9" as="fetch" crossorigin="anonymous">
@@ -620,7 +620,7 @@ A set of 5 animations starts from around 1.5 weeks and can take longer depending
   </main>
 
   <!-- Rive Web Canvas Runtime -->
-  <script src="https://unpkg.com/@rive-app/canvas@latest/rive.js"></script>
+  <script src="https://unpkg.com/@rive-app/canvas@2.38.0/rive.js"></script>
 
   <!-- Rive Initialization Script -->
   <script>
@@ -685,351 +685,191 @@ A set of 5 animations starts from around 1.5 weeks and can take longer depending
       const globalFallback = setTimeout(() => {
         console.warn("Hero load fallback triggered.");
         revealHero();
-      }, 8000);
-      // Card 1: Witch Animation
-      const witchCanvas = document.getElementById('rive-canvas-1');
-      if (witchCanvas) {
-        const witchRive = new rive.Rive({
+      }, 5000);
+
+      // Active Rive instances store
+      const activeRives = {};
+
+      // Configurations for all lazy-loaded Rive animations
+      const riveConfigs = {
+        'rive-canvas-1': {
           src: 'animation/witch.riv?v=2',
-          canvas: witchCanvas,
-          autoplay: true,
-          stateMachines: 'State Machine 1',
-          layout: new rive.Layout({
-            fit: rive.Fit.Contain,
-            alignment: rive.Alignment.Center
-          }),
-          onLoad: () => {
-            witchRive.resizeDrawingSurfaceToCanvas();
-          },
-          onLoadError: (err) => {
-            console.error("Witch load error:", err);
-          }
-        });
-        
-        window.addEventListener('resize', () => {
-          witchRive.resizeDrawingSurfaceToCanvas();
-        });
-      }
-
-      // Card 2: Lumi Animation
-      const lumiCanvas = document.getElementById('rive-canvas-2');
-      if (lumiCanvas) {
-        const lumiRive = new rive.Rive({
+          stateMachines: 'State Machine 1'
+        },
+        'rive-canvas-2': {
           src: 'animation/lumi_main.riv?v=5',
-          canvas: lumiCanvas,
-          autoplay: true,
-          stateMachines: 'State Machine 1',
-          layout: new rive.Layout({
-            fit: rive.Fit.Contain,
-            alignment: rive.Alignment.Center
-          }),
-          onLoad: () => {
-            lumiRive.resizeDrawingSurfaceToCanvas();
-          },
-          onLoadError: (err) => {
-            console.error("Lumi load error:", err);
-          }
-        });
-        
-        window.addEventListener('resize', () => {
-          lumiRive.resizeDrawingSurfaceToCanvas();
-        });
-      }
-
-      // Card 3: Gill Animation
-      const gillCanvas = document.getElementById('rive-canvas-3');
-      if (gillCanvas) {
-        const gillRive = new rive.Rive({
+          stateMachines: 'State Machine 1'
+        },
+        'rive-canvas-3': {
           src: 'animation/gill.riv?v=1',
-          canvas: gillCanvas,
-          autoplay: true,
-          stateMachines: 'State Machine 1',
-          layout: new rive.Layout({
-            fit: rive.Fit.Contain,
-            alignment: rive.Alignment.Center
-          }),
-          onLoad: () => {
-            gillRive.resizeDrawingSurfaceToCanvas();
-          },
-          onLoadError: (err) => {
-            console.error("Gill load error:", err);
-          }
-        });
-        
-        window.addEventListener('resize', () => {
-          gillRive.resizeDrawingSurfaceToCanvas();
-        });
-      }
-
-      // Card 4: Mofy Animation
-      const mofyCanvas = document.getElementById('rive-canvas-4');
-      if (mofyCanvas) {
-        const mofyRive = new rive.Rive({
+          stateMachines: 'State Machine 1'
+        },
+        'rive-canvas-4': {
           src: 'animation/mofy_(2).riv?v=4',
-          canvas: mofyCanvas,
-          autoplay: true,
           artboard: 'Artboard',
-          stateMachines: 'State Machine 1',
-          layout: new rive.Layout({
-            fit: rive.Fit.Contain,
-            alignment: rive.Alignment.Center
-          }),
-          onLoad: () => {
-            mofyRive.resizeDrawingSurfaceToCanvas();
-          },
-          onLoadError: (err) => {
-            console.error("Mofy load error:", err);
-          }
-        });
-        
-        window.addEventListener('resize', () => {
-          mofyRive.resizeDrawingSurfaceToCanvas();
-        });
-      }
-
-      // Card 5: Icon Animation initialized via img src="animation/icon.gif"
-
-      // Card 6: Flying Saucer Animation
-      const saucerCanvas6 = document.getElementById('rive-canvas-6');
-      if (saucerCanvas6) {
-        const saucerRive6 = new rive.Rive({
+          stateMachines: 'State Machine 1'
+        },
+        'rive-canvas-6': {
           src: 'animation/flying%20saucer.riv?v=2',
-          canvas: saucerCanvas6,
-          autoplay: true,
-          stateMachines: 'State Machine 1',
-          layout: new rive.Layout({
-            fit: rive.Fit.Contain,
-            alignment: rive.Alignment.Center
-          }),
-          onLoad: () => {
-            saucerRive6.resizeDrawingSurfaceToCanvas();
-          },
-          onLoadError: (err) => {
-            console.error("Flying saucer load error:", err);
-          }
-        });
-        
-        window.addEventListener('resize', () => {
-          saucerRive6.resizeDrawingSurfaceToCanvas();
-        });
-      }
-
-      // Card 7: Octopus Animation
-      const octopusCanvas7 = document.getElementById('rive-canvas-7');
-      if (octopusCanvas7) {
-        const octopusRive7 = new rive.Rive({
+          stateMachines: 'State Machine 1'
+        },
+        'rive-canvas-7': {
           src: 'animation/octopus.riv?v=4',
-          canvas: octopusCanvas7,
-          autoplay: true,
           artboard: 'Artboard',
           stateMachines: 'State Machine 1',
-          layout: new rive.Layout({
-            fit: rive.Fit.Contain,
-            alignment: rive.Alignment.Center
-          }),
-          onLoad: () => {
-            octopusRive7.resizeDrawingSurfaceToCanvas();
+          onLoad: (r) => {
             try {
-              const viewModel = octopusRive7.viewModelByName("ViewModel1");
+              const viewModel = r.viewModelByName("ViewModel1");
               if (viewModel) {
                 const viewModelInstance = viewModel.defaultInstance();
-                octopusRive7.bindViewModelInstance(viewModelInstance);
+                r.bindViewModelInstance(viewModelInstance);
               }
             } catch (e) {
-              console.error("Error binding ViewModel:", e);
+              console.error("Error binding ViewModel for Octopus:", e);
             }
-          },
-          onLoadError: (err) => {
-            console.error("Octopus load error:", err);
           }
-        });
-        
-        window.addEventListener('resize', () => {
-          octopusRive7.resizeDrawingSurfaceToCanvas();
-        });
-      }
-
-      // Card 8: Octopus 1 Animation
-      const octopusCanvas8 = document.getElementById('rive-canvas-8');
-      if (octopusCanvas8) {
-        const octopusRive8 = new rive.Rive({
+        },
+        'rive-canvas-8': {
           src: 'animation/octopus_1.riv?v=2',
-          canvas: octopusCanvas8,
-          autoplay: true,
           artboard: 'Artboard',
           stateMachines: 'State Machine 1',
-          layout: new rive.Layout({
-            fit: rive.Fit.Contain,
-            alignment: rive.Alignment.Center
-          }),
-          onLoad: () => {
-            octopusRive8.resizeDrawingSurfaceToCanvas();
+          onLoad: (r) => {
             try {
-              const viewModel = octopusRive8.viewModelByName("ViewModel1");
+              const viewModel = r.viewModelByName("ViewModel1");
               if (viewModel) {
                 const viewModelInstance = viewModel.defaultInstance();
-                octopusRive8.bindViewModelInstance(viewModelInstance);
+                r.bindViewModelInstance(viewModelInstance);
               }
             } catch (e) {
               console.error("Error binding ViewModel for Octopus 1:", e);
             }
-          },
-          onLoadError: (err) => {
-            console.error("Octopus 1 load error:", err);
           }
-        });
-        
-        window.addEventListener('resize', () => {
-          octopusRive8.resizeDrawingSurfaceToCanvas();
-        });
-      }
-
-      // Card 9: Raccoon Animation
-      const raccoonCanvas9 = document.getElementById('rive-canvas-9');
-      if (raccoonCanvas9) {
-        const raccoonRive9 = new rive.Rive({
+        },
+        'rive-canvas-9': {
           src: 'animation/raccoon.riv?v=3',
-          canvas: raccoonCanvas9,
-          autoplay: true,
           stateMachines: 'State Machine 1',
-          layout: new rive.Layout({
-            fit: rive.Fit.Contain,
-            alignment: rive.Alignment.Center
-          }),
-          onLoad: () => {
-            raccoonRive9.resizeDrawingSurfaceToCanvas();
+          onLoad: (r) => {
             try {
-              const viewModel = raccoonRive9.viewModelByName("ViewModel1") || (typeof raccoonRive9.defaultViewModel === 'function' ? raccoonRive9.defaultViewModel() : null);
+              const viewModel = r.viewModelByName("ViewModel1") || (typeof r.defaultViewModel === 'function' ? r.defaultViewModel() : null);
               if (viewModel) {
                 const viewModelInstance = viewModel.defaultInstance();
-                raccoonRive9.bindViewModelInstance(viewModelInstance);
+                r.bindViewModelInstance(viewModelInstance);
               }
             } catch (e) {
               console.warn("Raccoon ViewModel binding skipped/failed:", e);
             }
-          },
-          onLoadError: (err) => {
-            console.error("Raccoon load error:", err);
           }
-        });
-        
-        window.addEventListener('resize', () => {
-          raccoonRive9.resizeDrawingSurfaceToCanvas();
-        });
-      }
-
-      // Card 10: Father Frost Animation
-      const fatherFrostCanvas10 = document.getElementById('rive-canvas-10');
-      if (fatherFrostCanvas10) {
-        const fatherFrostRive10 = new rive.Rive({
+        },
+        'rive-canvas-10': {
           src: 'animation/Father%20Frost.riv?v=3',
-          canvas: fatherFrostCanvas10,
-          autoplay: true,
           stateMachines: 'State Machine 1',
-          layout: new rive.Layout({
-            fit: rive.Fit.Contain,
-            alignment: rive.Alignment.Center
-          }),
-          onLoad: () => {
-            fatherFrostRive10.resizeDrawingSurfaceToCanvas();
+          onLoad: (r) => {
             try {
-              const viewModel = fatherFrostRive10.viewModelByName("View Model 1") || (typeof fatherFrostRive10.defaultViewModel === 'function' ? fatherFrostRive10.defaultViewModel() : null);
+              const viewModel = r.viewModelByName("View Model 1") || (typeof r.defaultViewModel === 'function' ? r.defaultViewModel() : null);
               if (viewModel) {
                 const viewModelInstance = viewModel.defaultInstance();
-                fatherFrostRive10.bindViewModelInstance(viewModelInstance);
+                r.bindViewModelInstance(viewModelInstance);
               }
             } catch (e) {
               console.warn("Father Frost ViewModel binding skipped/failed:", e);
             }
-          },
-          onLoadError: (err) => {
-            console.error("Father Frost load error:", err);
           }
-        });
-        
-        window.addEventListener('resize', () => {
-          fatherFrostRive10.resizeDrawingSurfaceToCanvas();
-        });
-      }
-
-      // Selected Work Background: Pig Animation
-      const pigCanvas = document.getElementById('rive-canvas-pig');
-      if (pigCanvas) {
-        const pigRive = new rive.Rive({
+        },
+        'rive-canvas-pig': {
           src: 'animation/pig_(1).riv?v=3',
-          canvas: pigCanvas,
-          autoplay: true,
-          stateMachines: 'State Machine 1',
-          layout: new rive.Layout({
-            fit: rive.Fit.Contain,
-            alignment: rive.Alignment.Center
-          }),
-          onLoad: () => {
-            pigRive.resizeDrawingSurfaceToCanvas();
-          },
-          onLoadError: (err) => {
-            console.error("Pig load error:", err);
-          }
-        });
-        
-        window.addEventListener('resize', () => {
-          pigRive.resizeDrawingSurfaceToCanvas();
-        });
-      }
-
-      // Left Background Decorative: Pig Animation
-      const pigLeftCanvas = document.getElementById('rive-canvas-pig-left');
-      if (pigLeftCanvas) {
-        const pigLeftRive = new rive.Rive({
+          stateMachines: 'State Machine 1'
+        },
+        'rive-canvas-pig-left': {
           src: 'animation/pig.riv?v=1',
-          canvas: pigLeftCanvas,
-          autoplay: true,
-          stateMachines: 'State Machine 1',
-          layout: new rive.Layout({
-            fit: rive.Fit.Contain,
-            alignment: rive.Alignment.Center
-          }),
-          onLoad: () => {
-            pigLeftRive.resizeDrawingSurfaceToCanvas();
-          },
-          onLoadError: (err) => {
-            console.error("Left pig load error:", err);
-          }
-        });
-        
-        window.addEventListener('resize', () => {
-          pigLeftRive.resizeDrawingSurfaceToCanvas();
-        });
-      }
-
-      // Footer Background Decorative: Pig Animation
-      const pigFooterCanvas = document.getElementById('rive-canvas-pig-footer');
-      if (pigFooterCanvas) {
-        const pigFooterRive = new rive.Rive({
+          stateMachines: 'State Machine 1'
+        },
+        'rive-canvas-pig-footer': {
           src: 'animation/pig_(2).riv?v=1',
-          canvas: pigFooterCanvas,
-          autoplay: true,
-          stateMachines: 'State Machine 1',
-          layout: new rive.Layout({
-            fit: rive.Fit.Contain,
-            alignment: rive.Alignment.Center
-          }),
-          onLoad: () => {
-            pigFooterRive.resizeDrawingSurfaceToCanvas();
-          },
-          onLoadError: (err) => {
-            console.error("Footer pig load error:", err);
+          stateMachines: 'State Machine 1'
+        }
+      };
+
+      // Viewport observer to play/pause and lazy-load Rive animations
+      const riveObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          const canvas = entry.target;
+          const canvasId = canvas.id;
+          const isVisible = entry.isIntersecting;
+          const config = riveConfigs[canvasId];
+
+          if (isVisible) {
+            if (!activeRives[canvasId]) {
+              if (config) {
+                // Initialize Rive instance
+                const r = new rive.Rive({
+                  src: config.src,
+                  canvas: canvas,
+                  autoplay: true,
+                  artboard: config.artboard,
+                  stateMachines: config.stateMachines,
+                  layout: new rive.Layout({
+                    fit: rive.Fit.Contain,
+                    alignment: rive.Alignment.Center
+                  }),
+                  onLoad: () => {
+                    r.resizeDrawingSurfaceToCanvas();
+                    if (config.onLoad) config.onLoad(r);
+                  },
+                  onLoadError: (err) => {
+                    console.error(`Error loading ${canvasId}:`, err);
+                  }
+                });
+                activeRives[canvasId] = r;
+
+                const resizeHandler = () => r.resizeDrawingSurfaceToCanvas();
+                window.addEventListener('resize', resizeHandler);
+                config.resizeHandler = resizeHandler;
+              }
+            } else {
+              // Play if already instantiated
+              activeRives[canvasId].play();
+            }
+          } else {
+            // Pause if off-screen to save CPU/GPU cycles
+            if (activeRives[canvasId]) {
+              activeRives[canvasId].pause();
+            }
           }
         });
-        
-        window.addEventListener('resize', () => {
-          pigFooterRive.resizeDrawingSurfaceToCanvas();
-        });
-      }
+      }, {
+        rootMargin: '150px 0px 150px 0px', // Load slightly before scrolling into viewport
+        threshold: 0.01
+      });
 
-      // Hero: Character Animation
+      // Observe all lazy-loaded Rive canvases
+      Object.keys(riveConfigs).forEach(canvasId => {
+        const canvas = document.getElementById(canvasId);
+        if (canvas) {
+          riveObserver.observe(canvas);
+        }
+      });
+
+      // Special observer for Hero character canvas to play/pause on scroll
       const heroCanvas = document.getElementById('rive-canvas-hero');
       if (heroCanvas) {
+        const heroObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            const r = activeRives['rive-canvas-hero'];
+            if (r) {
+              if (entry.isIntersecting) {
+                r.play();
+              } else {
+                r.pause();
+              }
+            }
+          });
+        }, {
+          rootMargin: '0px',
+          threshold: 0.01
+        });
+        heroObserver.observe(heroCanvas);
+
+        // Load Hero Character with fetch buffer
         Promise.all([headerPromise, titlePromise, riveFetchPromise, fontsPromise]).then(([,, riveBuffer]) => {
           let heroRive;
           const riveConfig = {
@@ -1041,11 +881,9 @@ A set of 5 animations starts from around 1.5 weeks and can take longer depending
               alignment: rive.Alignment.Center
             }),
             onLoad: () => {
-              // Defer initial resize to ensure heroRive is assigned
               setTimeout(() => {
                 if (heroRive) heroRive.resizeDrawingSurfaceToCanvas();
               }, 0);
-              // Safari rendering safety: enforce redraw once layout settles
               requestAnimationFrame(() => {
                 if (heroRive) heroRive.resizeDrawingSurfaceToCanvas();
                 requestAnimationFrame(() => {
@@ -1067,8 +905,12 @@ A set of 5 animations starts from around 1.5 weeks and can take longer depending
           }
 
           heroRive = new rive.Rive(riveConfig);
+          activeRives['rive-canvas-hero'] = heroRive;
 
-          // Trigger waving/greetings animation on click or tap
+          const resizeHandler = () => heroRive.resizeDrawingSurfaceToCanvas();
+          window.addEventListener('resize', resizeHandler);
+
+          // Tap trigger interaction
           heroCanvas.addEventListener('click', () => {
             const inputs = heroRive.stateMachineInputs('State Machine 1') || [];
             const trigger = inputs.find(i => i.name === 'Trigger 1' || i.name === 'tap' || i.type === 1);
@@ -1077,10 +919,6 @@ A set of 5 animations starts from around 1.5 weeks and can take longer depending
             } else {
               heroRive.play('greetings');
             }
-          });
-
-          window.addEventListener('resize', () => {
-            heroRive.resizeDrawingSurfaceToCanvas();
           });
         });
       }
