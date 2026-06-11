@@ -112,20 +112,18 @@ body {
   position: absolute;
   left: 50%;
   bottom: 0;
-  --svg-scale: max(calc(100vw / 1929), calc(100vh / 1093));
-  width: calc(1000 * var(--svg-scale));
-  height: calc(710 * var(--svg-scale));
-  transform: translate(calc(-50% - 50 * var(--svg-scale)), calc(7 * var(--svg-scale)));
+  width: max(calc(1000 * 100vw / 1929), calc(1000 * 100vh / 1093));
+  height: max(calc(710 * 100vw / 1929), calc(710 * 100vh / 1093));
+  transform: translate(calc(-50% - max(calc(50 * 100vw / 1929), calc(50 * 100vh / 1093))), max(calc(7 * 100vw / 1929), calc(7 * 100vh / 1093)));
   pointer-events: none;
   z-index: 5;
 }
 
 @supports (height: 100dvh) {
   .hero-character-container {
-    --svg-scale-dvh: max(calc(100vw / 1929), calc(100dvh / 1093));
-    width: calc(1000 * var(--svg-scale-dvh));
-    height: calc(710 * var(--svg-scale-dvh));
-    transform: translate(calc(-50% - 50 * var(--svg-scale-dvh)), calc(7 * var(--svg-scale-dvh)));
+    width: max(calc(1000 * 100vw / 1929), calc(1000 * 100dvh / 1093));
+    height: max(calc(710 * 100vw / 1929), calc(710 * 100dvh / 1093));
+    transform: translate(calc(-50% - max(calc(50 * 100vw / 1929), calc(50 * 100dvh / 1093))), max(calc(7 * 100vw / 1929), calc(7 * 100dvh / 1093)));
   }
 }
 
