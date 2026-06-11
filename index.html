@@ -19,7 +19,34 @@
   <link rel="preload" href="assets/Moon%20designer.svg" as="image" type="image/svg+xml">
   <link rel="preload" href="animation/character.riv?v=9" as="fetch" crossorigin="anonymous">
 </head>
-<body>
+<body class="loading-active">
+
+  <!-- Branded Preloader Screen -->
+  <div id="preloader">
+    <div class="preloader-content">
+      <!-- Minimalist Branded Moon SVG -->
+      <svg class="preloader-moon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Glowing Moon Path -->
+        <path d="M40 15C55 15 68 23 75 35C62 37 50 48 50 63C50 75 57 85 67 90C59 95 50 97 40 97C19 97 3 80 3 59C3 38 19 15 40 15Z" 
+              fill="url(#preloader-moon-glow)" 
+              stroke="#FFF1AB" 
+              stroke-width="1.5" />
+        <defs>
+          <linearGradient id="preloader-moon-glow" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#FFF5C3" />
+            <stop offset="100%" stop-color="#FCEF94" />
+          </linearGradient>
+        </defs>
+      </svg>
+      <!-- Tiny sparkling stars near the moon -->
+      <div class="preloader-stars">
+        <span class="pstar pstar-1"></span>
+        <span class="pstar pstar-2"></span>
+        <span class="pstar pstar-3"></span>
+      </div>
+      <div class="preloader-text">MOON DESIGNER</div>
+    </div>
+  </div>
 
   <!-- Floating Navigation Header -->
   <header class="header-floating hero-fade">
@@ -635,6 +662,17 @@ A set of 5 animations starts from around 1.5 weeks and can take longer depending
         if (isHeroRevealed) return;
         isHeroRevealed = true;
         clearTimeout(globalFallback);
+        
+        // Hide preloader
+        const preloader = document.getElementById('preloader');
+        if (preloader) {
+          preloader.classList.add('fade-out');
+        }
+        
+        // Enable scrolling
+        document.body.classList.remove('loading-active');
+        
+        // Reveal hero composition
         document.querySelectorAll('.hero-fade').forEach(el => el.classList.add('loaded'));
       };
 
