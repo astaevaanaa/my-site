@@ -861,7 +861,6 @@ body {
 /* 3. Carousel Scroller Layout */
 .portfolio-carousel {
   display: flex;
-  gap: 58px; /* Fixed gap of exactly 58px between cards */
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch; /* Momentum scrolling on iOS devices */
@@ -874,6 +873,20 @@ body {
   /* Hides scrollbars on all browsers */
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE and Edge */
+}
+
+/* Safari scrollable width padding fix */
+.portfolio-carousel::after {
+  content: '';
+  display: block;
+  flex: 0 0 24px;
+  width: 24px;
+}
+
+@media (min-width: 1025px) {
+  .portfolio-carousel::after {
+    display: none;
+  }
 }
 
 .portfolio-carousel::-webkit-scrollbar {
@@ -902,6 +915,10 @@ body {
   scroll-snap-align: start;
   position: relative;
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+}
+
+.portfolio-card:not(:last-child) {
+  margin-right: 58px; /* Replacement for flex gap to fix Safari scrollable width bugs */
 }
 
 /* Solid Blue Preview Container Area (Figma color #2935B7) */
@@ -1007,8 +1024,10 @@ body {
     --card-scale: 0.6;
   }
   .portfolio-carousel {
-    gap: 20px;
     padding-bottom: 24px;
+  }
+  .portfolio-card:not(:last-child) {
+    margin-right: 20px;
   }
   .work-header-wrapper {
     margin-bottom: 16px;
