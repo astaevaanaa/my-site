@@ -191,6 +191,7 @@
         </clipPath>
       </defs>
     </svg>
+    <img src="assets/Moon%20designer.svg" alt="Moon Designer" class="hero-title-mobile" loading="eager">
     <div class="hero-character-container">
       <canvas id="rive-canvas-hero"></canvas>
     </div>
@@ -817,6 +818,9 @@ A set of 5 animations starts from around 1.5 weeks and can take longer depending
                   }),
                   onLoad: () => {
                     r.resizeDrawingSurfaceToCanvas();
+                    requestAnimationFrame(() => {
+                      r.resizeDrawingSurfaceToCanvas();
+                    });
                     if (config.onLoad) config.onLoad(r);
                   },
                   onLoadError: (err) => {

@@ -34,6 +34,7 @@ body {
   width: calc(100% - 48px); /* Fluid width with lateral margin on small screens */
   max-width: 536px; /* Locks at designed size on desktop matching new Header.svg */
   height: auto;
+  aspect-ratio: 536 / 48;
   pointer-events: none; /* Allows pointer events only for interactive links */
 }
 
@@ -41,6 +42,7 @@ body {
   position: relative;
   width: 100%;
   height: auto;
+  aspect-ratio: 536 / 48;
   pointer-events: auto; /* Re-enable pointer events for links */
   filter: drop-shadow(0 8px 30px rgba(0, 0, 0, 0.3));
 }
@@ -67,6 +69,15 @@ body {
   cursor: pointer;
   background: transparent;
   transition: background-color 0.2s ease-in-out;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  top: -12px;
+  bottom: -12px;
+  left: -8px;
+  right: -8px;
 }
 
 /* Precision mapping matching word columns in Header.svg precisely */
@@ -183,12 +194,19 @@ body {
 /* Set max-widths strictly matching designed asset viewboxes to protect quality */
 #about .section-svg-wrapper { 
   max-width: 1440px; 
+  aspect-ratio: 1440 / 734;
   position: relative; /* Enable relative positioning context specifically for About overlay */
 }
 #work .section-svg-wrapper { max-width: 1269px; }
 #offer .section-svg-wrapper { max-width: 1260px; }
+#offer-svg-object {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1260 / 444;
+}
 #process .section-svg-wrapper {
   max-width: 1260px;
+  aspect-ratio: 1260 / 812;
   position: relative; /* Context for left pig overlay */
 }
 
@@ -246,6 +264,7 @@ body {
 #connection .section-svg-wrapper { max-width: 1440px; }
 #footer .section-svg-wrapper { 
   max-width: 1436px; 
+  aspect-ratio: 1436 / 154;
   position: relative; /* Enable relative positioning context for children absolute overlays */
 }
 
@@ -581,6 +600,12 @@ body {
 #connection .section-svg-wrapper {
   max-width: 1440px;
   position: relative;
+}
+
+@media (min-width: 769px) {
+  #connection .section-svg-wrapper {
+    aspect-ratio: 1440 / 611;
+  }
 }
 
 /* Responsive Overlay Form */
@@ -1015,6 +1040,49 @@ body {
   }
   .carousel-arrow-left { left: -20px; }
   .carousel-arrow-right { right: -20px; }
+
+  /* Hero Section Mobile/Tablet title & character adjustments */
+  #moon-designer {
+    display: none;
+  }
+  .hero-title-mobile {
+    display: block;
+    position: absolute;
+    top: 15vh;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 85%;
+    max-width: 500px;
+    height: auto;
+    opacity: 0.70;
+    z-index: 2;
+  }
+  .hero-character-container {
+    width: 90% !important;
+    max-width: 450px !important;
+    height: auto !important;
+    aspect-ratio: 1000 / 710 !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    bottom: -10px !important;
+  }
+
+  /* Section spacing overrides */
+  .section-container {
+    margin-bottom: 80px !important;
+  }
+  #process {
+    margin-top: 0 !important;
+    margin-bottom: 80px !important;
+  }
+  #faq {
+    margin-top: 0 !important;
+    margin-bottom: 80px !important;
+  }
+  #connection {
+    margin-top: 0 !important;
+    margin-bottom: 80px !important;
+  }
 }
 
 @media (max-width: 768px) {
@@ -1032,6 +1100,30 @@ body {
   .work-header-wrapper {
     margin-bottom: 16px;
   }
+
+  /* Mobile margin/padding updates */
+  .main-content {
+    padding-top: 80px;
+  }
+  .section-container {
+    margin-bottom: 48px !important;
+    padding: 0 16px;
+  }
+  .footer-container {
+    padding: 0 16px;
+  }
+  #process {
+    margin-top: 0 !important;
+    margin-bottom: 48px !important;
+  }
+  #faq {
+    margin-top: 0 !important;
+    margin-bottom: 48px !important;
+  }
+  #connection {
+    margin-top: 0 !important;
+    margin-bottom: 48px !important;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1039,6 +1131,47 @@ body {
   .portfolio-carousel-wrapper,
   .portfolio-card {
     --card-scale: 0.5;
+  }
+  .portfolio-carousel {
+    padding: 16px 12px 24px 12px;
+  }
+  .portfolio-card:not(:last-child) {
+    margin-right: 16px;
+  }
+
+  /* Floating Header on small mobile screens */
+  .header-floating {
+    width: calc(100% - 16px);
+    top: 16px;
+  }
+
+  /* FAQ Accordion refinements */
+  .faq-accordion {
+    margin: 20px auto 0 auto;
+  }
+  .faq-item {
+    padding: 16px 16px;
+    margin-bottom: 16px;
+  }
+  .faq-question {
+    font-size: 16px;
+    min-height: auto;
+  }
+  .faq-answer {
+    font-size: 14px;
+    margin-top: 12px;
+  }
+  .faq-toggle {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+@media (max-width: 360px) {
+  /* Card scale for 320px screens to prevent horizontal cropping */
+  .portfolio-carousel-wrapper,
+  .portfolio-card {
+    --card-scale: 0.42;
   }
 }
 
