@@ -59,11 +59,11 @@
       <img src="assets/header.svg?v=2" alt="Portfolio Navigation" class="header-image" id="header-svg-img">
       <!-- Interactive Transparent Overlay Links -->
       <nav class="header-nav" aria-label="Main Navigation">
-        <a href="#hero" class="nav-link" aria-label="Home"></a>
-        <a href="#about" class="nav-link" aria-label="About"></a>
-        <a href="#work" class="nav-link" aria-label="Portfolio"></a>
-        <a href="#offer" class="nav-link" aria-label="Services"></a>
-        <a href="#connection" class="nav-link" aria-label="Contacts"></a>
+        <a href="#hero" class="nav-link" aria-label="Home"><span class="nav-text">Home</span></a>
+        <a href="#about" class="nav-link" aria-label="About"><span class="nav-text">About me</span></a>
+        <a href="#work" class="nav-link" aria-label="Portfolio"><span class="nav-text">Portfolio</span></a>
+        <a href="#offer" class="nav-link" aria-label="Services"><span class="nav-text">Services</span></a>
+        <a href="#connection" class="nav-link" aria-label="Contacts"><span class="nav-text">Contact me</span></a>
       </nav>
     </div>
   </header>
@@ -462,6 +462,42 @@
           <canvas id="rive-canvas-pig-left"></canvas>
         </div>
         <img src="assets/Conteiner process.svg?v=4" alt="Working Process" class="section-svg" loading="lazy">
+        
+        <!-- Mobile-only HTML Process grid -->
+        <div class="process-mobile-container">
+          <h2 class="process-mobile-title">How it works</h2>
+          <p class="process-mobile-subtitle">A simple and efficient workflow to bring your vision to life.</p>
+          
+          <div class="process-mobile-grid">
+            <!-- Card 1 -->
+            <div class="process-mobile-card">
+              <span class="process-mobile-number">1</span>
+              <h3 class="process-mobile-card-title">Get in Touch</h3>
+              <p class="process-mobile-card-text">Send me a message via email or any social media platform. We'll talk about your idea, goals, and how I can help bring it to life.</p>
+            </div>
+            
+            <!-- Card 2 -->
+            <div class="process-mobile-card">
+              <span class="process-mobile-number">2</span>
+              <h3 class="process-mobile-card-title">Project Brief</h3>
+              <p class="process-mobile-card-text">Once everything is clear, we define the scope, style direction, timeline, and deliverables. This helps keep the process structured and smooth.</p>
+            </div>
+            
+            <!-- Card 3 -->
+            <div class="process-mobile-card">
+              <span class="process-mobile-number">3</span>
+              <h3 class="process-mobile-card-title">Creation Process</h3>
+              <p class="process-mobile-card-text">I start working on the design, illustration, or animation depending on the project. You'll receive updates and can provide feedback along the way.</p>
+            </div>
+            
+            <!-- Card 4 -->
+            <div class="process-mobile-card">
+              <span class="process-mobile-number">4</span>
+              <h3 class="process-mobile-card-title">Delivery</h3>
+              <p class="process-mobile-card-text">You receive the final polished files, ready for use. Everything is organized and prepared for seamless implementation.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -470,6 +506,12 @@
       <div class="section-svg-wrapper">
         <!-- FAQ Section Header vector text -->
         <img src="assets/FAQ Header.svg" alt="Frequently Asked Questions" class="section-svg faq-header-svg" loading="lazy">
+        
+        <!-- Mobile FAQ Header -->
+        <div class="faq-mobile-header">
+          <h2 class="faq-mobile-title">Frequently Asked Questions</h2>
+          <p class="faq-mobile-subtitle">Find answers to the most common questions online.</p>
+        </div>
         
         <!-- Accordion component -->
         <div class="faq-accordion">
@@ -573,8 +615,8 @@ A set of 5 animations starts from around 1.5 weeks and can take longer depending
         
         <!-- Mobile Information Column (only visible on mobile) -->
         <div class="connection-mobile-info">
-          <h2 class="connection-title">Let's connect.</h2>
-          <a href="mailto:astaeva.anaa@gmail.com" class="connection-email">astaeva.anaa@gmail.com</a>
+          <h2 class="connection-title">Let's talk business</h2>
+          <p class="connection-subtitle">Now that you know a bit about me, let's connect and explore working together.</p>
         </div>
         
         <!-- Interactive Overlay Form -->
@@ -596,7 +638,10 @@ A set of 5 animations starts from around 1.5 weeks and can take longer depending
           <textarea name="message" class="conn-input message-input" required aria-label="Message"></textarea>
           
           <!-- Submit button -->
-          <button type="submit" class="conn-btn">LET'S TALK</button>
+          <button type="submit" class="conn-btn">
+            <span class="btn-text-desktop">LET'S TALK</span>
+            <span class="btn-text-mobile">LET'S GET STARTED</span>
+          </button>
         </form>
       </div>
     </section>

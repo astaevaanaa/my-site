@@ -876,10 +876,23 @@ body {
   right: -70px; /* Positioned completely outside Card 2 with a 14px gap */
 }
 
-/* Hide Arrow buttons on touchscreen/mobile displays where native swipe is preferred */
+/* Carousel Arrows on Mobile */
 @media (max-width: 768px) {
   .carousel-arrow {
-    display: none !important;
+    display: flex !important;
+    width: 40px !important;
+    height: 40px !important;
+    top: 50% !important;
+  }
+  .carousel-arrow-left {
+    left: 8px !important;
+  }
+  .carousel-arrow-right {
+    right: 8px !important;
+  }
+  .carousel-arrow svg {
+    width: 16px;
+    height: 16px;
   }
 }
 
@@ -1350,5 +1363,230 @@ body.loading-active {
 @keyframes star-twinkle {
   0%, 100% { opacity: 0.1; transform: scale(0.6); }
   50% { opacity: 0.8; transform: scale(1.1); filter: drop-shadow(0 0 4px rgba(253, 239, 148, 0.8)); }
+}
+
+/* Navigation Text Spans & Submit Button text helper defaults */
+.nav-text {
+  display: none;
+}
+.btn-text-mobile {
+  display: none;
+}
+.btn-text-desktop {
+  display: block;
+}
+
+/* Mobile-only layout sections (Hidden on desktop) */
+.process-mobile-container {
+  display: none;
+  width: 100%;
+}
+.faq-mobile-header {
+  display: none;
+  width: 100%;
+}
+.connection-subtitle {
+  display: none;
+}
+
+/* Background Continuation and layouts for Tablet & Mobile */
+@media (max-width: 1024px) {
+  .main-content {
+    background-image: url('assets/background main.svg?v=2'), url('assets/Background main 1.svg');
+    background-position: top center, top calc(100vw * 5173 / 1440) center;
+    background-size: 100% auto, 100% auto;
+    background-repeat: no-repeat, repeat-y;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Floating header reset for plain text links on mobile */
+  .header-floating {
+    aspect-ratio: unset !important;
+    width: 100% !important;
+    max-width: 450px !important;
+    top: 16px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+  }
+  .header-inner {
+    aspect-ratio: unset !important;
+    width: 100% !important;
+    height: auto !important;
+    filter: none !important;
+  }
+  .header-image {
+    display: none !important;
+  }
+  .header-nav {
+    position: static !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    width: 100% !important;
+    padding: 8px 16px !important;
+    height: auto !important;
+  }
+  .nav-link {
+    position: static !important;
+    width: auto !important;
+    height: auto !important;
+    color: #ffffff !important;
+    text-decoration: none !important;
+    font-family: 'Inter', -apple-system, sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    display: inline-block !important;
+    line-height: 1.5 !important;
+    background-color: transparent !important;
+  }
+  .nav-link:hover {
+    background-color: transparent !important;
+    opacity: 0.8;
+  }
+  .nav-link:focus-visible {
+    outline: 1px dashed #ffffff !important;
+    background-color: rgba(255, 255, 255, 0.1) !important;
+  }
+  .nav-text {
+    display: block !important;
+  }
+  /* Navigation DOM Reordering to match mockup */
+  .nav-link:nth-child(1) { order: 1 !important; left: unset !important; width: auto !important; }
+  .nav-link:nth-child(2) { order: 3 !important; left: unset !important; width: auto !important; }
+  .nav-link:nth-child(3) { order: 2 !important; left: unset !important; width: auto !important; }
+  .nav-link:nth-child(4) { display: none !important; } /* Hide Services link */
+  .nav-link:nth-child(5) { order: 4 !important; left: unset !important; width: auto !important; }
+
+  /* Process Section HTML 2x2 grid */
+  #process .section-svg {
+    display: none !important;
+  }
+  .process-mobile-container {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 0;
+  }
+  .process-mobile-title {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+  }
+  .process-mobile-subtitle {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.85);
+    text-align: center;
+    max-width: 90%;
+    margin: 0 auto 24px auto;
+    line-height: 1.4;
+  }
+  .process-mobile-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 16px !important;
+    width: 100% !important;
+  }
+  .process-mobile-card {
+    background: #ffffff !important;
+    border-radius: 12px !important;
+    padding: 20px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1) !important;
+    box-sizing: border-box !important;
+    text-align: left !important;
+  }
+  .process-mobile-number {
+    width: 32px !important;
+    height: 32px !important;
+    background: #EAEAEA !important;
+    color: #4D4D4D !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-weight: 700 !important;
+    font-size: 14px !important;
+    margin-bottom: 12px !important;
+    font-family: 'Inter', sans-serif !important;
+  }
+  .process-mobile-card-title {
+    color: #000000 !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    margin-bottom: 8px !important;
+  }
+  .process-mobile-card-text {
+    color: #666666 !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 12px !important;
+    line-height: 1.5 !important;
+  }
+
+  /* FAQ HTML Custom Header styling */
+  #faq .faq-header-svg {
+    display: none !important;
+  }
+  .faq-mobile-header {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 24px;
+  }
+  .faq-mobile-title {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+  }
+  .faq-mobile-subtitle {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.85);
+    text-align: center;
+    max-width: 90%;
+    margin: 0 auto;
+    line-height: 1.4;
+  }
+
+  /* Contact Section Custom Subtitle & Button Text Spans */
+  .connection-subtitle {
+    display: block !important;
+    font-family: 'Inter', -apple-system, sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 400 !important;
+    color: rgba(255, 255, 255, 0.85) !important;
+    margin-top: 8px !important;
+    line-height: 1.4 !important;
+    text-align: left !important;
+  }
+  .btn-text-desktop {
+    display: none !important;
+  }
+  .btn-text-mobile {
+    display: block !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .process-mobile-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
 }
 
