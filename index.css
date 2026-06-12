@@ -1164,11 +1164,11 @@ body {
   #offer {
     flex-direction: column !important;
     align-items: center !important;
-    margin-top: 24px !important;
-    margin-bottom: 72px !important;
+    margin-top: 20px !important;
+    margin-bottom: 60px !important;
   }
   #offer .section-svg-wrapper {
-    width: 115% !important;
+    width: 98% !important;
     max-width: none !important;
     flex-shrink: 0 !important;
     overflow: hidden !important;
@@ -1183,11 +1183,11 @@ body {
     flex-direction: column;
     align-items: center;
     width: 100%;
-    margin-bottom: 28px !important;
+    margin-bottom: 24px !important;
   }
   .offer-mobile-title {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    font-size: 28px !important;
+    font-size: 24px !important;
     font-weight: 700;
     color: #ffffff;
     text-align: center;
@@ -1196,7 +1196,7 @@ body {
   }
   .offer-mobile-subtitle {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    font-size: 14px !important;
+    font-size: 12px !important;
     font-weight: 400;
     color: rgba(255, 255, 255, 0.85);
     text-align: center;
