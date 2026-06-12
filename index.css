@@ -1086,6 +1086,9 @@ body {
   #moon-designer {
     display: none !important;
   }
+  .hero-section {
+    height: 75vh !important; /* Reduce overall mobile hero height significantly */
+  }
   .hero-bg-mobile {
     display: block !important;
     position: absolute;
@@ -1103,7 +1106,7 @@ body {
   .hero-title-mobile {
     display: block !important;
     position: absolute;
-    top: 12vh; /* Shifted up slightly from 15vh to feel more compressed and balanced */
+    top: 10vh; /* Reduced top position for a more compressed and balanced composition */
     left: 50%;
     transform: translateX(-50%);
     width: 75%; /* Reduced from 85% to fit and look more balanced on mobile */
@@ -1119,7 +1122,7 @@ body {
     aspect-ratio: 1000 / 710 !important;
     left: 50% !important;
     transform: translateX(-50%) !important;
-    bottom: -10px !important; /* Grounded closer to the bottom cloud line so it sits naturally */
+    bottom: -45px !important; /* Grounded lower to visually sit on the cloud layer (pulled down by 45px) */
     z-index: 3; /* Render on top of background hero 2.svg */
   }
 
@@ -1157,7 +1160,7 @@ body {
   /* Scales Card width perfectly to 360px on medium mobile screens */
   .portfolio-carousel-wrapper,
   .portfolio-card {
-    --card-scale: 0.72; /* Scaled up from 0.6 to make it feel more prominent */
+    --card-scale: 0.6; /* Restored back to original size */
   }
   .portfolio-carousel {
     padding-bottom: 24px;
@@ -1166,7 +1169,9 @@ body {
     margin-right: 20px;
   }
   .work-header-wrapper {
-    margin-bottom: 16px;
+    width: 125% !important; /* Scale up only the section title and subtitle */
+    padding-bottom: 16.75% !important; /* Proportional aspect-ratio height scaling (13.4% * 1.25) */
+    margin-bottom: 16px !important;
   }
 
   /* Mobile margin/padding updates */
@@ -1198,7 +1203,7 @@ body {
   /* Scales Card width perfectly to 300px on small mobile viewports */
   .portfolio-carousel-wrapper,
   .portfolio-card {
-    --card-scale: 0.65;
+    --card-scale: 0.5;
   }
   .portfolio-carousel {
     padding: 16px 12px 24px 12px;
@@ -1243,7 +1248,7 @@ body {
   /* Card scale for 320px screens to prevent horizontal cropping */
   .portfolio-carousel-wrapper,
   .portfolio-card {
-    --card-scale: 0.58;
+    --card-scale: 0.42;
   }
 }
 
