@@ -1107,7 +1107,7 @@ body {
   .hero-clouds-mobile {
     z-index: 4; /* Render in front of the character container (z-index: 3) to layer it between clouds */
     pointer-events: none; /* Clicks pass through to the character canvas */
-    transform: translateY(48px) !important; /* Shift middle clouds slightly further downward so the floating piece fully connects and blends naturally */
+    transform: translateY(42px) !important; /* Shift middle clouds slightly upward to connect and blend naturally */
   }
   .hero-svg-bg {
     display: none !important;
