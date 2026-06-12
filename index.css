@@ -1107,6 +1107,7 @@ body {
   .hero-clouds-mobile {
     z-index: 4; /* Render in front of the character container (z-index: 3) to layer it between clouds */
     pointer-events: none; /* Clicks pass through to the character canvas */
+    transform: translateY(15px) !important; /* Shift middle clouds slightly downward so the floating piece blends naturally */
   }
   .hero-svg-bg {
     display: none !important;
@@ -1124,8 +1125,8 @@ body {
     z-index: 2;
   }
   .hero-character-container {
-    width: 105% !important; /* Approximately 15% larger than original 90% (increased to 105%) */
-    max-width: 550px !important; /* Approximately 15% larger than original 450px (increased to 550px) */
+    width: 126% !important; /* Increased by 20% from 105% */
+    max-width: 660px !important; /* Increased by 20% from 550px */
     height: auto !important;
     aspect-ratio: 1000 / 710 !important;
     left: 50% !important;
