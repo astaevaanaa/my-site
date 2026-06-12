@@ -28,6 +28,7 @@ body {
 .nav-text,
 .btn-text-mobile,
 .process-mobile-container,
+.offer-mobile-header,
 .faq-mobile-header,
 .connection-subtitle,
 .hero-title-mobile,
@@ -1160,10 +1161,48 @@ body {
     max-width: none !important;
     flex-shrink: 0 !important;
   }
+  #offer {
+    flex-direction: column !important;
+    align-items: center !important;
+    margin-top: 24px !important;
+    margin-bottom: 72px !important;
+  }
   #offer .section-svg-wrapper {
     width: 115% !important;
     max-width: none !important;
     flex-shrink: 0 !important;
+    overflow: hidden !important;
+    aspect-ratio: 1260 / 195 !important;
+  }
+  #offer-svg-object {
+    display: block !important;
+    margin-top: -14.3% !important;
+  }
+  .offer-mobile-header {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 28px !important;
+  }
+  .offer-mobile-title {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 28px !important;
+    font-weight: 700;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+  }
+  .offer-mobile-subtitle {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 14px !important;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.85);
+    text-align: center;
+    max-width: 90%;
+    margin: 0 auto !important;
+    line-height: 1.45;
   }
 
   /* Scales Card width perfectly to 360px on medium mobile screens */
