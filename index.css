@@ -1122,7 +1122,7 @@ body {
     aspect-ratio: 1000 / 710 !important;
     left: 50% !important;
     transform: translateX(-50%) !important;
-    bottom: -45px !important; /* Grounded lower to visually sit on the cloud layer (pulled down by 45px) */
+    bottom: -15px !important; /* Raised slightly to sit naturally on the cloud layer */
     z-index: 3; /* Render on top of background hero 2.svg */
   }
 
