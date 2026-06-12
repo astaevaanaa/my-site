@@ -31,7 +31,8 @@ body {
 .faq-mobile-header,
 .connection-subtitle,
 .hero-title-mobile,
-.connection-mobile-info {
+.connection-mobile-info,
+.hero-bg-mobile {
   display: none !important;
 }
 .btn-text-desktop {
@@ -1081,10 +1082,22 @@ body {
     --card-scale: 0.72;
   }
   .carousel-arrow-left { left: -20px; }
-  .carousel-arrow-right { right: -20px; }
-
-  /* Hero Section Mobile/Tablet title & character adjustments */
+  .carousel-arrow-right { right: -20px; }  /* Hero Section Mobile/Tablet title & character adjustments */
   #moon-designer {
+    display: none !important;
+  }
+  .hero-bg-mobile {
+    display: block !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center bottom;
+    z-index: 1;
+  }
+  .hero-svg-bg {
     display: none !important;
   }
   .hero-title-mobile {
@@ -1100,24 +1113,14 @@ body {
     z-index: 2;
   }
   .hero-character-container {
-    width: 95% !important; /* About 10% larger from 90% */
-    max-width: 500px !important; /* About 10% larger from 450px */
+    width: 105% !important; /* Approximately 15% larger than original 90% (increased to 105%) */
+    max-width: 550px !important; /* Approximately 15% larger than original 450px (increased to 550px) */
     height: auto !important;
     aspect-ratio: 1000 / 710 !important;
     left: 50% !important;
     transform: translateX(-50%) !important;
-    bottom: 20px !important; /* Lowered closer to original position to look balanced */
-  }
-
-  /* Compress the background clouds and moon in SVG viewBox space for mobile */
-  svg.hero-svg-bg #moon {
-    transform: translate(-650px, 30px);
-  }
-  svg.hero-svg-bg #right-clouds {
-    transform: translate(-550px, 0);
-  }
-  svg.hero-svg-bg #left-clouds {
-    transform: translate(550px, 0);
+    bottom: -10px !important; /* Grounded closer to the bottom cloud line so it sits naturally */
+    z-index: 3; /* Render on top of background hero 2.svg */
   }
 
   /* Section spacing overrides */
@@ -1139,10 +1142,22 @@ body {
 }
 
 @media (max-width: 768px) {
+  /* Scale up Container About & Container Offer sections proportionally on mobile */
+  #about .section-svg-wrapper {
+    width: 115% !important;
+    max-width: none !important;
+    flex-shrink: 0 !important;
+  }
+  #offer .section-svg-wrapper {
+    width: 115% !important;
+    max-width: none !important;
+    flex-shrink: 0 !important;
+  }
+
   /* Scales Card width perfectly to 360px on medium mobile screens */
   .portfolio-carousel-wrapper,
   .portfolio-card {
-    --card-scale: 0.6;
+    --card-scale: 0.72; /* Scaled up from 0.6 to make it feel more prominent */
   }
   .portfolio-carousel {
     padding-bottom: 24px;
@@ -1183,7 +1198,7 @@ body {
   /* Scales Card width perfectly to 300px on small mobile viewports */
   .portfolio-carousel-wrapper,
   .portfolio-card {
-    --card-scale: 0.5;
+    --card-scale: 0.65;
   }
   .portfolio-carousel {
     padding: 16px 12px 24px 12px;
@@ -1228,7 +1243,7 @@ body {
   /* Card scale for 320px screens to prevent horizontal cropping */
   .portfolio-carousel-wrapper,
   .portfolio-card {
-    --card-scale: 0.42;
+    --card-scale: 0.58;
   }
 }
 
