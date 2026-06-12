@@ -22,6 +22,18 @@ body {
   line-height: 1.5;
 }
 
+/* Mobile-only layout sections and text spans (Hidden on desktop by default) */
+.nav-text,
+.btn-text-mobile,
+.process-mobile-container,
+.faq-mobile-header,
+.connection-subtitle {
+  display: none;
+}
+.btn-text-desktop {
+  display: block;
+}
+
 /* ==========================================================================
    Floating Navigation Header
    ========================================================================== */
@@ -1365,35 +1377,11 @@ body.loading-active {
   50% { opacity: 0.8; transform: scale(1.1); filter: drop-shadow(0 0 4px rgba(253, 239, 148, 0.8)); }
 }
 
-/* Navigation Text Spans & Submit Button text helper defaults */
-.nav-text {
-  display: none;
-}
-.btn-text-mobile {
-  display: none;
-}
-.btn-text-desktop {
-  display: block;
-}
-
-/* Mobile-only layout sections (Hidden on desktop) */
-.process-mobile-container {
-  display: none;
-  width: 100%;
-}
-.faq-mobile-header {
-  display: none;
-  width: 100%;
-}
-.connection-subtitle {
-  display: none;
-}
-
 /* Background Continuation and layouts for Tablet & Mobile */
 @media (max-width: 1024px) {
   .main-content {
     background-image: url('assets/background main.svg?v=2'), url('assets/Background main 1.svg');
-    background-position: top center, top calc(100vw * 5173 / 1440) center;
+    background-position: center top, 50% calc(100vw * 5173 / 1440);
     background-size: 100% auto, 100% auto;
     background-repeat: no-repeat, repeat-y;
   }
@@ -1461,6 +1449,10 @@ body.loading-active {
   /* Process Section HTML 2x2 grid */
   #process .section-svg {
     display: none !important;
+  }
+  #process .section-svg-wrapper {
+    aspect-ratio: unset !important;
+    height: auto !important;
   }
   .process-mobile-container {
     display: flex !important;
