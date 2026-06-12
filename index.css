@@ -32,7 +32,8 @@ body {
 .connection-subtitle,
 .hero-title-mobile,
 .connection-mobile-info,
-.hero-bg-mobile {
+.hero-bg-mobile,
+.hero-clouds-mobile {
   display: none !important;
 }
 .btn-text-desktop {
@@ -1089,7 +1090,8 @@ body {
   .hero-section {
     height: 75vh !important; /* Reduce overall mobile hero height significantly */
   }
-  .hero-bg-mobile {
+  .hero-bg-mobile,
+  .hero-clouds-mobile {
     display: block !important;
     position: absolute;
     top: 0;
@@ -1098,7 +1100,13 @@ body {
     height: 100%;
     object-fit: cover;
     object-position: center bottom;
+  }
+  .hero-bg-mobile {
     z-index: 1;
+  }
+  .hero-clouds-mobile {
+    z-index: 4; /* Render in front of the character container (z-index: 3) to layer it between clouds */
+    pointer-events: none; /* Clicks pass through to the character canvas */
   }
   .hero-svg-bg {
     display: none !important;
@@ -1106,7 +1114,7 @@ body {
   .hero-title-mobile {
     display: block !important;
     position: absolute;
-    top: 10vh; /* Reduced top position for a more compressed and balanced composition */
+    top: 18vh; /* Positioned slightly lower to sit directly above the character's head */
     left: 50%;
     transform: translateX(-50%);
     width: 75%; /* Reduced from 85% to fit and look more balanced on mobile */

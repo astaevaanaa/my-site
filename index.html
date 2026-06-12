@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
   <!-- Core Design System stylesheet -->
-  <link rel="stylesheet" href="index.css?v=54">
+  <link rel="stylesheet" href="index.css?v=55">
   <!-- Preload Critical Hero Assets -->
   <link rel="preload" href="https://unpkg.com/@rive-app/canvas@2.38.0/rive.js" as="script">
   <link rel="preload" href="assets/header.svg?v=2" as="image" type="image/svg+xml">
@@ -198,6 +198,21 @@
     <div class="hero-character-container">
       <canvas id="rive-canvas-hero"></canvas>
     </div>
+    <!-- Mobile-only Foreground Clouds (layering character between clouds) -->
+    <svg class="hero-clouds-mobile" viewBox="0 0 278 343" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M129.452 342.935C137.289 334.683 156.969 323.131 173 342.935H129.452Z" fill="url(#paint10_linear_307_1640)"/>
+      <path d="M111 342.935C114.97 338.737 124.941 332.859 133.062 342.935H111Z" fill="url(#paint11_linear_307_1640)"/>
+      <defs>
+        <linearGradient id="paint10_linear_307_1640" x1="151.322" y1="328.547" x2="152.058" y2="337.566" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#4773F7"/>
+          <stop offset="1" stop-color="#1D4EDE"/>
+        </linearGradient>
+        <linearGradient id="paint11_linear_307_1640" x1="121.647" y1="334.398" x2="122.113" y2="340.25" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#4773F7"/>
+          <stop offset="1" stop-color="#1D4EDE"/>
+        </linearGradient>
+      </defs>
+    </svg>
   </section>
 
   <!-- Continuous Main Background wrapper holding all subsequent sections -->
