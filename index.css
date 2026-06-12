@@ -16,7 +16,9 @@ html {
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  background: linear-gradient(180deg, #307ae2 0%, #2e43df 20%, #3355dc 50%, #a42ae2 100%); /* Seamless gradient matching assets from top to bottom */
+  background-color: #9a2ce3; /* Fallback solid purple matching bottom assets */
+  background-image: linear-gradient(180deg, #307ae2 0%, #2e43df 20%, #3355dc 50%, #a42ae2 100%); /* Seamless gradient matching assets from top to bottom */
+  background-repeat: no-repeat;
   color: #ffffff;
   overflow-x: hidden;
   line-height: 1.5;
@@ -1088,23 +1090,34 @@ body {
   .hero-title-mobile {
     display: block !important;
     position: absolute;
-    top: 15vh;
+    top: 12vh; /* Shifted up slightly from 15vh to feel more compressed and balanced */
     left: 50%;
     transform: translateX(-50%);
-    width: 85%;
-    max-width: 500px;
+    width: 75%; /* Reduced from 85% to fit and look more balanced on mobile */
+    max-width: 450px;
     height: auto;
     opacity: 0.70;
     z-index: 2;
   }
   .hero-character-container {
-    width: 90% !important;
-    max-width: 450px !important;
+    width: 95% !important; /* About 10% larger from 90% */
+    max-width: 500px !important; /* About 10% larger from 450px */
     height: auto !important;
     aspect-ratio: 1000 / 710 !important;
     left: 50% !important;
     transform: translateX(-50%) !important;
-    bottom: 90px !important;
+    bottom: 20px !important; /* Lowered closer to original position to look balanced */
+  }
+
+  /* Compress the background clouds and moon in SVG viewBox space for mobile */
+  svg.hero-svg-bg #moon {
+    transform: translate(-650px, 30px);
+  }
+  svg.hero-svg-bg #right-clouds {
+    transform: translate(-550px, 0);
+  }
+  svg.hero-svg-bg #left-clouds {
+    transform: translate(550px, 0);
   }
 
   /* Section spacing overrides */
