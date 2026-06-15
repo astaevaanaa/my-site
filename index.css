@@ -138,6 +138,21 @@ body {
   pointer-events: none;
 }
 
+.hero-svg-fg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+  z-index: 6; /* Render in front of the character (z-index: 5) */
+}
+
+.hero-svg-fg #middle-clouds {
+  transform: translateY(24px); /* Lower on desktop to blend naturally */
+}
+
 .hero-character-container {
   position: absolute;
   left: 50%;
@@ -1103,14 +1118,15 @@ body {
     object-position: center bottom;
   }
   .hero-bg-mobile {
-    z-index: 1;
+    z-index: 1 !important;
   }
   .hero-clouds-mobile {
-    z-index: 4; /* Render in front of the character container (z-index: 3) to layer it between clouds */
+    z-index: 4 !important; /* Render in front of the character container (z-index: 3) to layer it between clouds */
     pointer-events: none; /* Clicks pass through to the character canvas */
-    transform: translateY(42px) !important; /* Shift middle clouds slightly upward to connect and blend naturally */
+    transform: translateY(24px) !important; /* Lower on mobile to blend naturally */
   }
-  .hero-svg-bg {
+  .hero-svg-bg,
+  .hero-svg-fg {
     display: none !important;
   }
   .hero-title-mobile {
@@ -1123,7 +1139,7 @@ body {
     max-width: 450px;
     height: auto;
     opacity: 0.70;
-    z-index: 2;
+    z-index: 2 !important;
   }
   .hero-character-container {
     width: 126% !important; /* Increased by 20% from 105% */
@@ -1133,7 +1149,7 @@ body {
     left: 50% !important;
     transform: translateX(-50%) !important;
     bottom: -15px !important; /* Raised slightly to sit naturally on the cloud layer */
-    z-index: 3; /* Render on top of background hero 2.svg */
+    z-index: 3 !important; /* Render on top of background hero 2.svg */
   }
 
   /* Section spacing overrides */

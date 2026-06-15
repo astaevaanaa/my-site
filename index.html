@@ -13,6 +13,28 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
   <!-- Core Design System stylesheet -->
   <link rel="stylesheet" href="index.css?v=61">
+  <!-- Compiled Layout Overrides -->
+  <link rel="stylesheet" href="editor-overrides.css">
+  <!-- Visual Editor Direct Overlay Loader -->
+  <script>
+    (function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      const hasSecret = urlParams.get('edit') === 'astaeva_edit' || urlParams.get('secret') === 'astaeva_edit';
+      
+      if (urlParams.has('edit') && (isLocal || hasSecret)) {
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = 'editor.css';
+        document.head.appendChild(link);
+        
+        const script = document.createElement('script');
+        script.src = 'editor.js';
+        script.defer = true;
+        document.head.appendChild(script);
+      }
+    })();
+  </script>
   <!-- Preload Critical Hero Assets -->
   <link rel="preload" href="https://unpkg.com/@rive-app/canvas@2.38.0/rive.js" as="script">
   <link rel="preload" href="assets/header.svg?v=2" as="image" type="image/svg+xml">
@@ -121,17 +143,6 @@
         <!-- Layer Moon designer text behind the Rive character -->
         <image id="moon-designer" href="assets/Moon%20designer.svg" x="449.5" y="390" width="1030" height="350" opacity="0.70" />
 
-        <g id="middle-clouds">
-          <path id="Vector 452" d="M994 1097C1034.85 1053.99 1137.44 993.768 1221 1097H994Z" fill="url(#paint10_linear_72_230)"/>
-          <path id="Vector 453" d="M898 1097C918.694 1075.12 970.667 1044.48 1013 1097H898Z" fill="url(#paint11_linear_72_230)"/>
-        </g>
-        <g id="star">
-          <circle id="Ellipse 1530" cx="1403.5" cy="199.5" r="6.5" fill="#FCEF94"/>
-          <circle id="Ellipse 1531" cx="641" cy="314" r="6" fill="#FCEF94"/>
-          <circle id="Ellipse 1532" cx="272" cy="260" r="13" fill="#FCEF94"/>
-          <circle id="Ellipse 1533" cx="1611" cy="601" r="8" fill="#FCEF94"/>
-          <circle id="Ellipse 1534" cx="1486.5" cy="155.5" r="15.5" fill="#FCEF94"/>
-        </g>
       </g>
       <defs>
         <linearGradient id="star-tail" x1="0" y1="1" x2="1" y2="0">
@@ -181,6 +192,31 @@
           <stop offset="0.151103" stop-color="#2B42DA"/>
           <stop offset="1" stop-color="#779BEE"/>
         </linearGradient>
+        <clipPath id="clip0_72_230">
+          <rect width="1929" height="1093" fill="white"/>
+        </clipPath>
+      </defs>
+    </svg>
+    <img src="assets/Moon%20designer.svg" alt="Moon Designer" class="hero-title-mobile" loading="eager">
+    <div class="hero-character-container">
+      <canvas id="rive-canvas-hero"></canvas>
+    </div>
+    <!-- Desktop-only Foreground SVG (layering middle clouds in front of character) -->
+    <svg class="hero-svg-fg" viewBox="0 0 1929 1093" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMax slice">
+      <g clip-path="url(#clip0_72_230)">
+        <g id="middle-clouds">
+          <path id="Vector 452" d="M994 1097C1034.85 1053.99 1137.44 993.768 1221 1097H994Z" fill="url(#paint10_linear_72_230)"/>
+          <path id="Vector 453" d="M898 1097C918.694 1075.12 970.667 1044.48 1013 1097H898Z" fill="url(#paint11_linear_72_230)"/>
+        </g>
+        <g id="star">
+          <circle id="Ellipse 1530" cx="1403.5" cy="199.5" r="6.5" fill="#FCEF94"/>
+          <circle id="Ellipse 1531" cx="641" cy="314" r="6" fill="#FCEF94"/>
+          <circle id="Ellipse 1532" cx="272" cy="260" r="13" fill="#FCEF94"/>
+          <circle id="Ellipse 1533" cx="1611" cy="601" r="8" fill="#FCEF94"/>
+          <circle id="Ellipse 1534" cx="1486.5" cy="155.5" r="15.5" fill="#FCEF94"/>
+        </g>
+      </g>
+      <defs>
         <linearGradient id="paint10_linear_72_230" x1="1108" y1="1022" x2="1111.84" y2="1069.01" gradientUnits="userSpaceOnUse">
           <stop stop-color="#4773F7"/>
           <stop offset="1" stop-color="#1D4EDE"/>
@@ -194,10 +230,6 @@
         </clipPath>
       </defs>
     </svg>
-    <img src="assets/Moon%20designer.svg" alt="Moon Designer" class="hero-title-mobile" loading="eager">
-    <div class="hero-character-container">
-      <canvas id="rive-canvas-hero"></canvas>
-    </div>
     <!-- Mobile-only Foreground Clouds (layering character between clouds) -->
     <svg class="hero-clouds-mobile" viewBox="0 0 278 343" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M129.452 342.935C137.289 334.683 156.969 323.131 173 342.935H129.452Z" fill="url(#paint10_linear_307_1640)"/>
@@ -697,6 +729,9 @@ A set of 5 animations starts from around 1.5 weeks and can take longer depending
 
   <!-- Rive Initialization Script -->
   <script>
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
     // Start pre-fetching critical assets as early as possible (before DOMContentLoaded)
     const characterRivUrl = 'animation/character.riv?v=9';
     const riveFetchPromise = fetch(characterRivUrl)
@@ -752,6 +787,7 @@ A set of 5 animations starts from around 1.5 weeks and can take longer depending
         
         // Reveal hero composition
         document.querySelectorAll('.hero-fade').forEach(el => el.classList.add('loaded'));
+        window.scrollTo(0, 0);
       };
 
       // Global fallback to reveal hero section if Rive CDN or assets stall (e.g. offline/blocked connection)

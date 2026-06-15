@@ -26,3 +26,9 @@ dist-ssr
 # Unused large files
 example.jpg
 
+# Python cache
+__pycache__/
+*.pyc
+
+# Scratch directory
+scratch/
