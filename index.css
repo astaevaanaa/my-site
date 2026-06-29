@@ -1123,7 +1123,7 @@ body {
   .hero-clouds-mobile {
     z-index: 2 !important; /* Render behind the character container (z-index: 3) to sit behind the character */
     pointer-events: none; /* Clicks pass through to the character canvas */
-    transform: translateY(55px) !important; /* Shift middle clouds downward to connect with lower clouds and attach character */
+    transform: translateY(40px) !important; /* Shift middle clouds upward to connect with lower clouds and attach character */
   }
   .hero-svg-bg,
   .hero-svg-fg {
