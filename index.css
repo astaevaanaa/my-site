@@ -1121,9 +1121,9 @@ body {
     z-index: 1 !important;
   }
   .hero-clouds-mobile {
-    z-index: 4 !important; /* Render in front of the character container (z-index: 3) to layer it between clouds */
+    z-index: 2 !important; /* Render behind the character container (z-index: 3) to sit behind the character */
     pointer-events: none; /* Clicks pass through to the character canvas */
-    transform: translateY(24px) !important; /* Lower on mobile to blend naturally */
+    transform: translateY(55px) !important; /* Shift middle clouds downward to connect with lower clouds and attach character */
   }
   .hero-svg-bg,
   .hero-svg-fg {
