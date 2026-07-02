@@ -1591,6 +1591,7 @@ body.loading-active {
     height: 16px !important;
     padding: 0 !important;
     pointer-events: auto !important;
+    margin-right: 12px !important;
   }
   
   .hamburger-bar {
