@@ -1537,7 +1537,7 @@ body.loading-active {
   /* Floating header reset for mobile menu */
   .header-floating {
     aspect-ratio: unset !important;
-    position: fixed !important;
+    position: absolute !important;
     width: calc(100vw - 48px) !important; /* 24px spacing from left/right edges */
     max-width: 768px !important;
     top: 24px !important; /* 24px spacing from top */
