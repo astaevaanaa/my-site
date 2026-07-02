@@ -1159,10 +1159,10 @@ body {
   .hero-middle-clouds-mobile {
     display: block !important;
     position: absolute;
-    bottom: 14px; /* Moved down 40px to sit closer to belt/waist area */
+    bottom: -6px; /* Moved 20px lower */
     left: 50%;
-    transform: translateX(-50%);
-    width: 115px; /* Sized down by ~18% */
+    transform: translateX(calc(-50% + 15px)); /* Shifted 15px to the right */
+    width: 115px; /* Scale kept unchanged */
     height: auto;
     z-index: 4 !important; /* Positioned in front of the character (z-index: 3) */
     pointer-events: none;
