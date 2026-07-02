@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
   <!-- Core Design System stylesheet -->
-  <link rel="stylesheet" href="index.css?v=63">
+  <link rel="stylesheet" href="index.css?v=64">
   <!-- Compiled Layout Overrides -->
   <link rel="stylesheet" href="editor-overrides.css">
   <!-- Visual Editor Direct Overlay Loader -->
@@ -77,7 +77,8 @@
 
   <!-- Floating Navigation Header -->
   <header class="header-floating hero-fade">
-    <div class="header-inner">
+    <!-- Desktop Header -->
+    <div class="header-inner desktop-header">
       <img src="assets/header.svg?v=2" alt="Portfolio Navigation" class="header-image" id="header-svg-img">
       <!-- Interactive Transparent Overlay Links -->
       <nav class="header-nav" aria-label="Main Navigation">
@@ -88,7 +89,32 @@
         <a href="#connection" class="nav-link" aria-label="Contacts"><span class="nav-text">Contact me</span></a>
       </nav>
     </div>
+
+    <!-- Mobile Header -->
+    <div class="mobile-header">
+      <a href="#hero" class="mobile-brand">Astaeva</a>
+      <button class="mobile-menu-btn" aria-label="Open Navigation Menu" id="mobile-menu-trigger">
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+      </button>
+    </div>
   </header>
+
+  <!-- Mobile Navigation Overlay Menu -->
+  <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+    <button class="mobile-menu-close" aria-label="Close Navigation Menu" id="mobile-menu-close">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M18 6L6 18M6 6L18 18" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+    <nav class="mobile-menu-nav">
+      <a href="#hero" class="mobile-menu-link">Home</a>
+      <a href="#work" class="mobile-menu-link">Portfolio</a>
+      <a href="#about" class="mobile-menu-link">About me</a>
+      <a href="#connection" class="mobile-menu-link">Contact me</a>
+    </nav>
+  </div>
 
   <!-- Hero Section (First Screen - 100vh) -->
   <section class="hero-section hero-fade" id="hero">
@@ -1133,6 +1159,38 @@ A set of 5 animations starts from around 1.5 weeks and can take longer depending
           .finally(() => {
             submitBtn.textContent = originalText;
             submitBtn.disabled = false;
+          });
+        });
+      }
+    });
+  </script>
+
+  <!-- Mobile Menu Trigger & Logic Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const trigger = document.getElementById('mobile-menu-trigger');
+      const closeBtn = document.getElementById('mobile-menu-close');
+      const overlay = document.getElementById('mobile-menu-overlay');
+      const links = overlay.querySelectorAll('.mobile-menu-link');
+
+      if (trigger && closeBtn && overlay) {
+        // Open Mobile Overlay
+        trigger.addEventListener('click', () => {
+          overlay.classList.add('open');
+          document.body.style.overflow = 'hidden';
+        });
+
+        // Close Mobile Overlay
+        closeBtn.addEventListener('click', () => {
+          overlay.classList.remove('open');
+          document.body.style.overflow = '';
+        });
+
+        // Close Mobile Overlay on Menu Link Click
+        links.forEach(link => {
+          link.addEventListener('click', () => {
+            overlay.classList.remove('open');
+            document.body.style.overflow = '';
           });
         });
       }

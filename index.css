@@ -66,6 +66,31 @@ body {
   filter: drop-shadow(0 8px 30px rgba(0, 0, 0, 0.3));
 }
 
+.desktop-header {
+  display: block;
+}
+
+.mobile-header {
+  display: none;
+}
+
+.mobile-menu-overlay {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(13, 19, 65, 0.98); /* Deep space navy */
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 .header-image {
   width: 100%;
   height: auto;
@@ -1507,63 +1532,134 @@ body.loading-active {
 }
 
 @media (max-width: 768px) {
-  /* Floating header reset for plain text links on mobile */
+  /* Floating header reset for mobile menu */
   .header-floating {
     aspect-ratio: unset !important;
-    width: 100% !important;
+    position: fixed !important;
+    width: calc(100vw - 32px) !important;
     max-width: 450px !important;
     top: 16px !important;
     left: 50% !important;
     transform: translateX(-50%) !important;
+    box-sizing: border-box !important;
   }
-  .header-inner {
-    aspect-ratio: unset !important;
-    width: 100% !important;
-    height: auto !important;
-    filter: none !important;
-  }
-  .header-image {
+  
+  .desktop-header {
     display: none !important;
   }
-  .header-nav {
-    position: static !important;
+  
+  .mobile-header {
     display: flex !important;
-    justify-content: space-between !important;
-    align-items: center !important;
+    justify-content: space-between;
+    align-items: center;
     width: 100% !important;
-    padding: 8px 16px !important;
-    height: auto !important;
+    padding: 12px 20px;
+    background: rgba(26, 35, 126, 0.75); /* Royal blue base with premium translucency */
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 24px;
+    pointer-events: auto !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+    box-sizing: border-box !important;
   }
-  .nav-link {
-    position: static !important;
-    width: auto !important;
-    height: auto !important;
+  
+  .mobile-brand {
     color: #ffffff !important;
-    text-decoration: none !important;
     font-family: 'Inter', -apple-system, sans-serif !important;
-    font-size: 14px !important;
-    font-weight: 500 !important;
-    display: inline-block !important;
-    line-height: 1.5 !important;
-    background-color: transparent !important;
+    font-size: 20px !important;
+    font-weight: 700 !important;
+    text-decoration: none !important;
+    letter-spacing: -0.02em !important;
+    transition: opacity 0.2s ease !important;
+    pointer-events: auto !important;
   }
-  .nav-link:hover {
-    background-color: transparent !important;
-    opacity: 0.8;
+  
+  .mobile-brand:hover,
+  .mobile-brand:active {
+    opacity: 0.8 !important;
   }
-  .nav-link:focus-visible {
-    outline: 1px dashed #ffffff !important;
-    background-color: rgba(255, 255, 255, 0.1) !important;
+  
+  .mobile-menu-btn {
+    background: transparent !important;
+    border: none !important;
+    cursor: pointer !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    width: 24px !important;
+    height: 16px !important;
+    padding: 0 !important;
+    pointer-events: auto !important;
   }
-  .nav-text {
+  
+  .hamburger-bar {
+    width: 100% !important;
+    height: 2px !important;
+    background-color: #ffffff !important;
+    border-radius: 2px !important;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
     display: block !important;
   }
-  /* Navigation DOM Reordering to match mockup */
-  .nav-link:nth-child(1) { order: 1 !important; left: unset !important; width: auto !important; }
-  .nav-link:nth-child(2) { order: 3 !important; left: unset !important; width: auto !important; }
-  .nav-link:nth-child(3) { order: 2 !important; left: unset !important; width: auto !important; }
-  .nav-link:nth-child(4) { display: none !important; } /* Hide Services link */
-  .nav-link:nth-child(5) { order: 4 !important; left: unset !important; width: auto !important; }
+  
+  /* Mobile Overlay Menu Styles */
+  .mobile-menu-overlay.open {
+    right: 0 !important;
+  }
+  
+  .mobile-menu-close {
+    position: absolute !important;
+    top: 24px !important;
+    right: 24px !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    cursor: pointer !important;
+    width: 48px !important;
+    height: 48px !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    border-radius: 50% !important;
+    transition: all 0.2s ease !important;
+  }
+  
+  .mobile-menu-close:active {
+    background: rgba(255, 255, 255, 0.2) !important;
+    transform: scale(0.92) !important;
+  }
+  
+  .mobile-menu-nav {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 32px !important;
+  }
+  
+  .mobile-menu-link {
+    color: #ffffff !important;
+    font-family: 'Inter', -apple-system, sans-serif !important;
+    font-size: 32px !important;
+    font-weight: 700 !important;
+    text-decoration: none !important;
+    letter-spacing: -0.02em !important;
+    opacity: 0;
+    transform: translateX(30px);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease !important;
+  }
+  
+  .mobile-menu-overlay.open .mobile-menu-link {
+    opacity: 1 !important;
+    transform: translateX(0) !important;
+  }
+  
+  .mobile-menu-overlay.open .mobile-menu-link:nth-child(1) { transition-delay: 0.1s !important; }
+  .mobile-menu-overlay.open .mobile-menu-link:nth-child(2) { transition-delay: 0.2s !important; }
+  .mobile-menu-overlay.open .mobile-menu-link:nth-child(3) { transition-delay: 0.3s !important; }
+  .mobile-menu-overlay.open .mobile-menu-link:nth-child(4) { transition-delay: 0.4s !important; }
+  
+  .mobile-menu-link:active {
+    color: #FCEF94 !important;
+  }
 
   /* Process Section HTML 2x2 grid */
   #process .section-svg {
