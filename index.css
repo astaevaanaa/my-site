@@ -35,7 +35,8 @@ body {
 .hero-title-mobile,
 .connection-mobile-info,
 .hero-bg-mobile,
-.hero-clouds-mobile {
+.hero-clouds-mobile,
+.hero-middle-clouds-mobile {
   display: none !important;
 }
 .btn-text-desktop {
@@ -1154,6 +1155,17 @@ body {
   }
   #cloud_middle {
     transform: translateY(6px) !important; /* Adjust only the cloud_middle element slightly downward */
+  }
+  .hero-middle-clouds-mobile {
+    display: block !important;
+    position: absolute;
+    bottom: 54px; /* Centered around character waist level */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 140px; /* Visually balanced scale */
+    height: auto;
+    z-index: 4 !important; /* Positioned in front of the character (z-index: 3) */
+    pointer-events: none;
   }
   .hero-svg-bg,
   .hero-svg-fg {
