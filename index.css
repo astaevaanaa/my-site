@@ -12,6 +12,7 @@ html {
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 body {
@@ -88,7 +89,8 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  visibility: hidden;
+  transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.4s;
 }
 
 .header-image {
@@ -1606,6 +1608,7 @@ body.loading-active {
   /* Mobile Overlay Menu Styles */
   .mobile-menu-overlay.open {
     right: 0 !important;
+    visibility: visible !important;
   }
   
   .mobile-menu-close {
