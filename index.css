@@ -955,15 +955,15 @@ body {
 @media (max-width: 768px) {
   .carousel-arrow {
     display: flex !important;
-    width: 40px !important;
-    height: 40px !important;
+    width: 36px !important; /* Reduced by 10% */
+    height: 36px !important; /* Reduced by 10% */
     top: 50% !important;
   }
   .carousel-arrow-left {
-    left: 8px !important;
+    left: 4px !important; /* Shifted outwards for breathing room */
   }
   .carousel-arrow-right {
-    right: 8px !important;
+    right: 4px !important; /* Shifted outwards for breathing room */
   }
   .carousel-arrow svg {
     width: 16px;
@@ -1280,6 +1280,9 @@ body {
   .portfolio-carousel {
     overflow-x: hidden !important; /* Disable user swiping to enforce arrow-only navigation */
     padding: 16px 0 32px 0 !important; /* Remove horizontal padding so active card aligns perfectly in center */
+  }
+  .work-pig-wrapper {
+    right: calc(50% - (601px * var(--card-scale) / 2) + 20px) !important; /* Shipped 20px left relative to active card right edge */
   }
   .portfolio-card:not(:last-child) {
     margin-right: 20px;
