@@ -646,20 +646,20 @@ body {
 /* Responsiveness overrides */
 @media (max-width: 768px) {
   .faq-item {
-    padding: 16px 20px !important;
-    margin-bottom: 20px !important;
+    padding: 13px 16px !important; /* Reduced by 20% */
+    margin-bottom: 16px !important; /* Reduced by 20% */
   }
   .faq-question {
-    font-size: 16px !important;
+    font-size: 14px !important; /* Reduced by 12.5% */
     min-height: unset !important;
   }
   .faq-toggle {
-    width: 38px !important;
-    height: 38px !important;
+    width: 32px !important; /* Reduced by 15% */
+    height: 32px !important; /* Reduced by 15% */
   }
   .faq-toggle svg {
-    width: 14px !important;
-    height: 14px !important;
+    width: 12px !important; /* Reduced by 15% */
+    height: 12px !important; /* Reduced by 15% */
   }
 }
 
@@ -1344,26 +1344,27 @@ body {
   /* FAQ Accordion refinements */
   .faq-accordion {
     margin: 16px auto 0 auto !important;
+    width: 90% !important; /* Center and add margins */
   }
   .faq-item {
-    padding: 12px 14px !important;
-    margin-bottom: 12px !important;
+    padding: 10px 12px !important; /* Reduced padding by 15-20% */
+    margin-bottom: 10px !important; /* Reduced margin by 15-20% */
   }
   .faq-question {
-    font-size: 14px !important;
+    font-size: 12px !important; /* Reduced font size */
     min-height: auto !important;
   }
   .faq-answer {
-    font-size: 12px !important;
+    font-size: 10.5px !important; /* Reduced font size */
     margin-top: 10px !important;
   }
   .faq-toggle {
-    width: 30px !important;
-    height: 30px !important;
+    width: 26px !important; /* Reduced size by 15% */
+    height: 26px !important; /* Reduced size by 15% */
   }
   .faq-toggle svg {
-    width: 11px !important;
-    height: 11px !important;
+    width: 9px !important; /* Reduced size by 15% */
+    height: 9px !important; /* Reduced size by 15% */
   }
 }
 
@@ -1787,7 +1788,7 @@ body.loading-active {
   }
   .faq-mobile-title {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    font-size: 24px !important;
+    font-size: 21px !important; /* Reduced by 12.5% */
     font-weight: 700;
     color: #ffffff;
     text-align: center;
@@ -1796,13 +1797,18 @@ body.loading-active {
   }
   .faq-mobile-subtitle {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    font-size: 12px !important;
+    font-size: 10.5px !important; /* Reduced by 12.5% */
     font-weight: 400;
     color: rgba(255, 255, 255, 0.85);
     text-align: center;
     max-width: 90%;
     margin: 0 auto;
     line-height: 1.4;
+  }
+  .faq-accordion {
+    width: 90% !important; /* Reduced width to add breathing room around cards */
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
 
   /* Contact Section Custom Subtitle & Button Text Spans */
