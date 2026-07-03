@@ -1229,7 +1229,7 @@ body {
   #offer {
     flex-direction: column !important;
     align-items: center !important;
-    margin-top: 20px !important;
+    margin-top: 5px !important; /* Moved 15px upward to reduce vertical gap below Selected Work */
     margin-bottom: 60px !important;
   }
   #offer .section-svg-wrapper {
@@ -1292,8 +1292,8 @@ body {
     margin-right: 20px;
   }
   .work-header-wrapper {
-    width: 142% !important; /* Increased by 12% to match 'What I Offer' header hierarchy */
-    padding-bottom: 19% !important; /* Scale height proportionally */
+    width: 159% !important; /* Increased by another 12% to match 'What I Offer' header hierarchy */
+    padding-bottom: 21.3% !important; /* Scale height proportionally */
     margin-bottom: 16px !important;
   }
 
