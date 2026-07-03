@@ -1283,6 +1283,7 @@ body {
   }
   .work-pig-wrapper {
     right: calc(50% - (601px * var(--card-scale) / 2) + 20px) !important; /* Shipped 20px left relative to active card right edge */
+    top: calc(-140px * var(--card-scale) + 15px) !important; /* Moved 15px downward to fully mask pig behind the card */
   }
   .portfolio-card:not(:last-child) {
     margin-right: 20px;
