@@ -1212,7 +1212,7 @@ body {
     margin-bottom: 60px !important; /* Reduced to make layout feel lighter and more compact */
   }
   #faq {
-    margin-top: 30px !important; /* Moved 30px down to create a larger gap from How It Works */
+    margin-top: 60px !important; /* Moved 60px down to create a larger gap from How It Works */
     margin-bottom: 80px !important;
   }
   #connection {
@@ -1315,7 +1315,7 @@ body {
     margin-bottom: 40px !important;
   }
   #faq {
-    margin-top: 0 !important;
+    margin-top: 60px !important; /* Moved 60px down to create a larger gap from How It Works */
     margin-bottom: 40px !important;
   }
   #connection {
