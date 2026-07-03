@@ -651,7 +651,9 @@ body {
   }
   .faq-question {
     font-size: 14px !important; /* Reduced by 12.5% */
-    min-height: unset !important;
+    min-height: 32px !important; /* Vertically center single-line questions by matching toggle button height */
+    display: flex !important;
+    align-items: center !important;
   }
   .faq-toggle {
     width: 32px !important; /* Reduced by 15% */
@@ -1210,7 +1212,7 @@ body {
     margin-bottom: 60px !important; /* Reduced to make layout feel lighter and more compact */
   }
   #faq {
-    margin-top: 0 !important;
+    margin-top: 30px !important; /* Moved 30px down to create a larger gap from How It Works */
     margin-bottom: 80px !important;
   }
   #connection {
@@ -1352,7 +1354,9 @@ body {
   }
   .faq-question {
     font-size: 12px !important; /* Reduced font size */
-    min-height: auto !important;
+    min-height: 26px !important; /* Vertically center single-line questions by matching toggle button height */
+    display: flex !important;
+    align-items: center !important;
   }
   .faq-answer {
     font-size: 10.5px !important; /* Reduced font size */
