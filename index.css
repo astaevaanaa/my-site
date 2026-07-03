@@ -972,6 +972,10 @@ body {
 }
 
 /* 3. Carousel Scroller Layout */
+.portfolio-carousel-clip {
+  width: 100%;
+  overflow: visible;
+}
 .portfolio-carousel {
   display: flex;
   overflow-x: auto;
@@ -1268,15 +1272,21 @@ body {
   .portfolio-card {
     --card-scale: 0.51; 
   }
+  .portfolio-carousel-clip {
+    width: calc(601px * var(--card-scale)) !important;
+    overflow: hidden !important;
+    margin: 0 auto !important;
+  }
   .portfolio-carousel {
-    padding-bottom: 24px;
+    overflow-x: hidden !important; /* Disable user swiping to enforce arrow-only navigation */
+    padding: 16px 0 32px 0 !important; /* Remove horizontal padding so active card aligns perfectly in center */
   }
   .portfolio-card:not(:last-child) {
     margin-right: 20px;
   }
   .work-header-wrapper {
-    width: 106% !important; /* Scaled down from 125% by 15% */
-    padding-bottom: 14.2% !important; /* Scaled down from 16.75% by 15% */
+    width: 127% !important; /* Increased by 20% on mobile */
+    padding-bottom: 17% !important; /* Increased by 20% on mobile */
     margin-bottom: 16px !important;
   }
 
@@ -1312,7 +1322,7 @@ body {
     --card-scale: 0.425;
   }
   .portfolio-carousel {
-    padding: 16px 12px 24px 12px;
+    padding: 16px 0 24px 0;
   }
   .portfolio-card:not(:last-child) {
     margin-right: 16px;
