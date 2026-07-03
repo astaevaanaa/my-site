@@ -1230,15 +1230,15 @@ body {
     margin-bottom: 60px !important;
   }
   #offer .section-svg-wrapper {
-    width: 98% !important;
+    width: 127% !important; /* Scaled up by 30% from 98% to make cards more readable */
     max-width: none !important;
     flex-shrink: 0 !important;
     overflow: hidden !important;
-    aspect-ratio: 1260 / 195 !important;
+    aspect-ratio: 1260 / 264 !important; /* Restored full height of cards + shadows (from Y=180 to Y=444) */
   }
   #offer-svg-object {
     display: block !important;
-    margin-top: -14.3% !important;
+    margin-top: -14.3% !important; /* Start visible area at Y=180 to hide SVG header */
   }
   .offer-mobile-header {
     display: flex !important;
@@ -1249,7 +1249,7 @@ body {
   }
   .offer-mobile-title {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    font-size: 24px !important;
+    font-size: 21px !important; /* Reduced by 12.5% from 24px */
     font-weight: 700;
     color: #ffffff;
     text-align: center;
@@ -1258,7 +1258,7 @@ body {
   }
   .offer-mobile-subtitle {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    font-size: 12px !important;
+    font-size: 10.5px !important; /* Reduced by 12.5% from 12px */
     font-weight: 400;
     color: rgba(255, 255, 255, 0.85);
     text-align: center;
