@@ -1202,6 +1202,9 @@ body {
   .section-container {
     margin-bottom: 80px !important;
   }
+  #work {
+    margin-top: 30px !important;
+  }
   #process {
     margin-top: 0 !important;
     margin-bottom: 80px !important;
@@ -1289,8 +1292,8 @@ body {
     margin-right: 20px;
   }
   .work-header-wrapper {
-    width: 127% !important; /* Increased by 20% on mobile */
-    padding-bottom: 17% !important; /* Increased by 20% on mobile */
+    width: 142% !important; /* Increased by 12% to match 'What I Offer' header hierarchy */
+    padding-bottom: 19% !important; /* Scale height proportionally */
     margin-bottom: 16px !important;
   }
 
