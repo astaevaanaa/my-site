@@ -1725,7 +1725,7 @@ body.loading-active {
     color: rgba(255, 255, 255, 0.85);
     text-align: center;
     max-width: 90%;
-    margin: 0 auto 16px auto !important;
+    margin: 0 auto 32px auto !important; /* Increased margin-bottom from 16px to 32px to create breathing room */
     line-height: 1.4;
   }
   .process-mobile-grid {
