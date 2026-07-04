@@ -1316,7 +1316,7 @@ body {
   }
   .footer-container {
     display: block !important;
-    padding: 30px 0 80px 0 !important; /* Shipped pig 30px down, 80px empty space beneath it */
+    padding: 0 0 30px 0 !important; /* Moved pig 30px up (closer to the button), kept 30px breathing room below it */
     background: transparent !important;
     height: auto !important;
     min-height: auto !important;
