@@ -449,10 +449,13 @@ body {
 
 @media (max-width: 768px) {
   .footer-pig-wrapper {
+    position: relative !important; /* Center naturally as block */
+    margin: 0 auto !important;
+    bottom: unset !important;
+    left: unset !important;
+    transform: none !important;
     width: 220px;
     height: 220px;
-    bottom: calc(100% - 78px);
-    left: calc(50% - 80px);
   }
 }
 
@@ -460,8 +463,8 @@ body {
   .footer-pig-wrapper {
     width: 180px;
     height: 180px;
-    bottom: calc(100% - 63px);
-    left: calc(50% - 65px);
+    bottom: unset !important;
+    left: unset !important;
   }
 }
 
@@ -1312,7 +1315,22 @@ body {
     padding: 0 16px;
   }
   .footer-container {
-    padding: 0 16px;
+    display: block !important;
+    padding: 30px 0 80px 0 !important; /* Shipped pig 30px down, 80px empty space beneath it */
+    background: transparent !important;
+    height: auto !important;
+    min-height: auto !important;
+  }
+  #footer .section-svg-wrapper {
+    position: relative !important;
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: unset !important;
+    margin: 0 !important;
+  }
+  #footer .section-svg,
+  .footer-overlay-link {
+    display: none !important; /* Hide footer background image and interactive links entirely on mobile */
   }
   #process {
     margin-top: 0 !important;
