@@ -449,22 +449,29 @@ body {
 
 @media (max-width: 768px) {
   .footer-pig-wrapper {
-    position: relative !important; /* Center naturally as block */
-    margin: 0 auto !important;
-    bottom: unset !important;
+    position: absolute !important;
+    top: -95px !important; /* Shipped 30-40px higher to sit closer to the button */
+    right: 16px !important; /* Small margin from the right edge */
     left: unset !important;
     transform: none !important;
-    width: 220px;
-    height: 220px;
+    width: 180px !important;
+    height: 180px !important;
+    pointer-events: none !important;
+    z-index: 10 !important;
   }
 }
 
 @media (max-width: 480px) {
   .footer-pig-wrapper {
-    width: 180px;
-    height: 180px;
-    bottom: unset !important;
+    position: absolute !important;
+    top: -95px !important; /* Keep same vertical alignment */
+    right: 16px !important; /* Small margin from the right edge */
     left: unset !important;
+    transform: none !important;
+    width: 150px !important; /* Slightly smaller for small viewports */
+    height: 150px !important;
+    pointer-events: none !important;
+    z-index: 10 !important;
   }
 }
 
@@ -1223,7 +1230,7 @@ body {
     margin-bottom: 80px !important;
   }
   #connection {
-    margin-top: 0 !important;
+    margin-top: 15px !important; /* Moved 15px lower to create more spacing from FAQ */
     margin-bottom: 80px !important;
   }
 }
@@ -1316,17 +1323,21 @@ body {
   }
   .footer-container {
     display: block !important;
-    padding: 0 0 30px 0 !important; /* Moved pig 30px up (closer to the button), kept 30px breathing room below it */
+    position: relative !important; /* Anchors the absolute positioned pig wrapper to this container */
+    padding: 0 0 120px 0 !important; /* Leaves exactly 30px breathing room below the 180px pig (top: -95px) */
     background: transparent !important;
     height: auto !important;
     min-height: auto !important;
+    overflow: visible !important;
   }
   #footer .section-svg-wrapper {
-    position: relative !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
     width: 100% !important;
-    height: auto !important;
+    height: 0 !important;
     aspect-ratio: unset !important;
-    margin: 0 !important;
+    overflow: visible !important;
   }
   #footer .section-svg,
   .footer-overlay-link {
@@ -1341,7 +1352,7 @@ body {
     margin-bottom: 40px !important;
   }
   #connection {
-    margin-top: 0 !important;
+    margin-top: 15px !important; /* Moved 15px lower to create more spacing from FAQ */
     margin-bottom: 40px !important;
   }
 }
@@ -1391,6 +1402,10 @@ body {
   .faq-toggle svg {
     width: 9px !important; /* Reduced size by 15% */
     height: 9px !important; /* Reduced size by 15% */
+  }
+  .footer-container {
+    position: relative !important; /* Anchors the absolute positioned pig wrapper to this container */
+    padding: 0 0 85px 0 !important; /* Shipped 30px breathing room below the 150px pig (top: -95px) */
   }
 }
 
