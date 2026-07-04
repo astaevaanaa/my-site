@@ -1230,7 +1230,7 @@ body {
     margin-bottom: 80px !important;
   }
   #connection {
-    margin-top: 15px !important; /* Moved 15px lower to create more spacing from FAQ */
+    margin-top: 30px !important; /* Moved 30px lower to create more spacing from FAQ */
     margin-bottom: 80px !important;
   }
 }
@@ -1352,7 +1352,7 @@ body {
     margin-bottom: 40px !important;
   }
   #connection {
-    margin-top: 15px !important; /* Moved 15px lower to create more spacing from FAQ */
+    margin-top: 30px !important; /* Moved 30px lower to create more spacing from FAQ */
     margin-bottom: 40px !important;
   }
 }
