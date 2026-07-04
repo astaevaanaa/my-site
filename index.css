@@ -786,17 +786,19 @@ body {
 
   .connection-mobile-info {
     display: block !important;
-    width: 100%;
-    margin-bottom: 16px !important;
+    width: 90% !important; /* Reduced width to add breathing room on sides */
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-bottom: 12px !important; /* Reduced spacing */
     text-align: left;
   }
 
   .connection-title {
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-    font-size: 30px !important;
+    font-size: 24px !important; /* Reduced by 20% */
     font-weight: 700;
     color: #ffffff;
-    margin-bottom: 6px !important;
+    margin-bottom: 4px !important;
   }
 
   .connection-email {
@@ -808,7 +810,9 @@ body {
 
   .connection-form {
     position: relative;
-    width: 100%;
+    width: 90% !important; /* Reduced width to add breathing room on sides */
+    margin-left: auto !important;
+    margin-right: auto !important;
     height: auto;
     display: flex;
     flex-direction: column;
@@ -818,32 +822,32 @@ body {
   .conn-label {
     display: block !important;
     font-family: 'Inter', -apple-system, sans-serif !important;
-    font-size: 12px !important;
+    font-size: 11px !important; /* Reduced slightly */
     font-weight: 500;
     color: #ffffff;
-    margin-bottom: 4px !important;
+    margin-bottom: 2px !important; /* Reduced spacing */
     text-align: left;
   }
 
   .conn-input {
     position: static !important;
     width: 100% !important;
-    height: 42px !important;
-    margin-bottom: 12px !important;
-    font-size: 14px !important;
+    height: 34px !important; /* Reduced height by ~20% */
+    margin-bottom: 8px !important; /* Reduced spacing by ~33% */
+    font-size: 12.5px !important; /* Reduced font size */
   }
 
   .message-input {
-    height: 100px !important;
-    padding: 10px 14px !important;
+    height: 80px !important; /* Reduced height by 20% */
+    padding: 8px 12px !important; /* Reduced padding */
   }
 
   .conn-btn {
     position: static !important;
     width: 100% !important;
-    height: 48px !important;
-    margin-top: 6px !important;
-    font-size: 16px !important;
+    height: 38px !important; /* Reduced height by 20% */
+    margin-top: 4px !important; /* Reduced spacing */
+    font-size: 13px !important; /* Reduced font size by ~20% */
   }
 }
 
@@ -1819,10 +1823,10 @@ body.loading-active {
   .connection-subtitle {
     display: block !important;
     font-family: 'Inter', -apple-system, sans-serif !important;
-    font-size: 12px !important;
+    font-size: 10.5px !important; /* Reduced by 12.5% */
     font-weight: 400 !important;
     color: rgba(255, 255, 255, 0.85) !important;
-    margin-top: 6px !important;
+    margin-top: 4px !important; /* Reduced spacing */
     line-height: 1.4 !important;
     text-align: left !important;
   }
